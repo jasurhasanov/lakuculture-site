@@ -381,7 +381,7 @@ const keepers = [
     tradition: 'Culinary',
     name: 'Traditional Culinary Keeper',
     copy: 'Ibu Noni',
-    description: 'Introduces Indonesian drinks, spices, sweets, and local hospitality through taste.',
+    description: 'Introduces Indonesian drinks, spices, sweets, local cooking classes, and hospitality through taste.',
     image: '/images/laku/20251008_091302.jpg',
     alt: 'Ibu Noni, Traditional Culinary Keeper',
     cta: 'Learn with Ibu Noni'
