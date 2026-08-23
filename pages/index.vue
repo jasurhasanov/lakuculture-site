@@ -370,11 +370,11 @@ const keepers = [
   },
   {
     tradition: 'Natural-Fiber Weaving',
-    name: 'Traditional Anyaman Culture Keeper',
+    name: 'Anyaman Culture Keeper',
     copy: 'Pak Yusuf',
     description: 'Introduces traditional anyaman through natural fibers, handwoven forms, and practical skills passed through daily making.',
     image: '/images/laku/20260816_090306.jpg',
-    alt: 'Pak Yusuf, Traditional Anyaman Culture Keeper',
+    alt: 'Pak Yusuf, Anyaman Culture Keeper',
     cta: 'Learn with Pak Yusuf'
   },
   {
