@@ -68,8 +68,8 @@
       <section id="visit" class="pathway-section">
         <div class="shell">
           <div class="section-head centered">
-            <p class="eyebrow">Visitor pathways</p>
-            <h2>Four ways to take part.</h2>
+            <p class="eyebrow">Visit LAKU</p>
+            <h2>Choose how deeply you want to take part.</h2>
             <p>
               Every guest can meet LAKU at the level that fits their curiosity, time,
               and commitment.
@@ -91,7 +91,7 @@
         <div class="shell split">
           <div>
             <p class="eyebrow dark-text">This week at LAKU</p>
-            <h2>Reliability is part of the experience.</h2>
+            <h2>Plan your visit around a living tradition.</h2>
             <p class="section-copy">
               See which Culture Keeper is practicing each day and arrive knowing what
               tradition you can observe, try, or learn more deeply.
@@ -111,12 +111,12 @@
           <div class="section-head values-head">
             <div>
               <p class="eyebrow">Create with Culture Keepers</p>
-              <h2>Two signature workshops to begin with.</h2>
+              <h2>Workshops you can book or request.</h2>
             </div>
             <p>
-              Choose between bamboo weaving and batik wax drawing, each guided by a
-              Culture Keeper with clear details before you book: duration, price, age
-              guidance, what you create, and what you take home.
+              Create something by hand with a Culture Keeper. Book available weaving
+              and culinary experiences, or ask us about batik, pottery, and rattan
+              sessions for your dates.
             </p>
           </div>
 
@@ -218,12 +218,12 @@
       <section id="inquiry" class="inquiry-section">
         <div class="shell inquiry-grid">
           <div>
-            <p class="eyebrow">Start here</p>
+            <p class="eyebrow">Plan with us</p>
             <h2>Tell us what you want to experience.</h2>
             <p>
               Ask about workshops, apprenticeships, group visits, handmade products,
-              commissions, or custom cultural programs. The LAKU team will follow up
-              with details and availability.
+              commissions, or custom cultural programs. Share your dates and group
+              details, and the LAKU team will follow up with availability.
             </p>
           </div>
 
@@ -315,9 +315,12 @@ const schedule = [
 ]
 
 const workshops = [
-  { status: 'Available to book', title: 'Bamboo Weaving Introduction', meta: '90 minutes / price shared on inquiry / beginner friendly', points: ['Create a small woven piece with a Bamboo Culture Keeper', 'Learn material preparation and simple patterns', 'Take home your handmade object'], cta: 'Book This Workshop' },
-  { status: 'Available to book', title: 'Batik Wax Lines', meta: '2 hours / price shared on inquiry / ages 10+', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Book This Workshop' },
-  { status: 'Coming soon', title: 'Pottery, Rattan, Weaving, and Culinary', meta: 'Future workshops / join the waitlist', points: ['Preview the next traditions opening at LAKU', 'Hear when new workshop dates are ready', 'Plan a private group session around your interests'], cta: 'Join the Waitlist' }
+  { status: 'Available to book', title: 'Nyensek Weaving', meta: 'Duration and price shared on inquiry / beginner friendly', points: ['Weave with a Culture Keeper using traditional Lombok techniques', 'Create a small textile piece through guided hands-on practice', 'Take home the piece you make and the story behind the tradition'], cta: 'Book This Workshop' },
+  { status: 'Available to book', title: 'Kecapil Hats Weaving', meta: 'Duration and price shared on inquiry / beginner friendly', points: ['Learn how kecapil hat forms are built from woven natural materials', 'Shape a handmade piece with step-by-step guidance', 'Take home your woven work or arrange collection if finishing time is needed'], cta: 'Book This Workshop' },
+  { status: 'Available to book', title: 'Culinary Classes', meta: 'Duration and price shared on inquiry / suitable for families and groups', points: ['Cook with a Traditional Culinary Keeper using local ingredients', 'Learn the story, preparation, and hospitality around the dish', 'Share what you make at LAKU or plan a private group session'], cta: 'Book This Workshop' },
+  { status: 'Available by request', title: 'Batik Wax Lines', meta: 'Requested dates / price shared on inquiry / ages 10+', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Request This Workshop' },
+  { status: 'Available by request', title: 'Pottery', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Shape clay with a Pottery Culture Keeper', 'Learn basic form, texture, and hand-building techniques', 'Take home your piece or arrange collection after drying and firing'], cta: 'Request This Workshop' },
+  { status: 'Available by request', title: 'Rattan', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Work with rattan patterns guided by a Culture Keeper', 'Practice simple weaving structures and material handling', 'Take home a handmade woven object'], cta: 'Request This Workshop' }
 ]
 
 const programs = ['1 week', '2 weeks', '3 weeks', '1 month']
