@@ -232,10 +232,16 @@
               Name
               <input v-model="form.name" required type="text" autocomplete="name" />
             </label>
-            <label>
-              Email or WhatsApp
-              <input v-model="form.contact" required type="text" autocomplete="email" />
-            </label>
+            <div class="form-row">
+              <label>
+                Email
+                <input v-model="form.email" type="email" autocomplete="email" />
+              </label>
+              <label>
+                WhatsApp
+                <input v-model="form.whatsapp" type="tel" autocomplete="tel" />
+              </label>
+            </div>
             <label>
               I am interested in
               <select v-model="form.interest" required>
@@ -346,7 +352,8 @@ const services = [
 
 const form = reactive({
   name: '',
-  contact: '',
+  email: '',
+  whatsapp: '',
   interest: '',
   dates: '',
   groupSize: '',
@@ -362,6 +369,13 @@ const handleInquiry = async () => {
   submitStatus.value = ''
   submitMessage.value = ''
 
+  if (!form.email.trim() && !form.whatsapp.trim()) {
+    submitStatus.value = 'error'
+    submitMessage.value = 'Please add an email address or WhatsApp number so the LAKU team can reply.'
+    isSubmitting.value = false
+    return
+  }
+
   try {
     await $fetch('/api/inquiry', {
       method: 'POST',
@@ -372,7 +386,8 @@ const handleInquiry = async () => {
     submitMessage.value = 'Thank you. The LAKU team received your inquiry and will follow up soon.'
     Object.assign(form, {
       name: '',
-      contact: '',
+      email: '',
+      whatsapp: '',
       interest: '',
       dates: '',
       groupSize: '',

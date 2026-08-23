@@ -1,6 +1,7 @@
 type InquiryPayload = {
   name?: string
-  contact?: string
+  email?: string
+  whatsapp?: string
   interest?: string
   dates?: string
   groupSize?: string
@@ -29,17 +30,18 @@ export default defineEventHandler(async (event) => {
   const body = await readBody<InquiryPayload>(event)
   const inquiry = {
     name: clean(body.name),
-    contact: clean(body.contact),
+    email: clean(body.email),
+    whatsapp: clean(body.whatsapp),
     interest: clean(body.interest),
     dates: clean(body.dates) || 'Flexible',
     groupSize: clean(body.groupSize) || 'Not specified',
     message: clean(body.message) || 'No extra message provided.'
   }
 
-  if (!inquiry.name || !inquiry.contact || !inquiry.interest) {
+  if (!inquiry.name || !inquiry.interest || (!inquiry.email && !inquiry.whatsapp)) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Name, contact, and interest are required.'
+      statusMessage: 'Name, email or WhatsApp, and interest are required.'
     })
   }
 
@@ -53,7 +55,8 @@ export default defineEventHandler(async (event) => {
           color: 0xc99342,
           fields: [
             { name: 'Name', value: inquiry.name, inline: true },
-            { name: 'Email / WhatsApp', value: inquiry.contact, inline: true },
+            { name: 'Email', value: inquiry.email || 'Not provided', inline: true },
+            { name: 'WhatsApp', value: inquiry.whatsapp || 'Not provided', inline: true },
             { name: 'Interest', value: inquiry.interest, inline: false },
             { name: 'Preferred dates', value: inquiry.dates, inline: true },
             { name: 'Group size', value: inquiry.groupSize, inline: true },
