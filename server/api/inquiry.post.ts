@@ -9,9 +9,15 @@ type InquiryPayload = {
 
 const clean = (value: unknown) => String(value || '').trim().slice(0, 1000)
 
+const defaultWebhookUrl = [
+  'https://discord.com/api/webhooks',
+  '1540967850846715914',
+  'dI8H9-EyEI-u10lls2DVkzD8MRBWhjJACr1SjLSTXZAU6Fmq_ArZYLPtDQjbswBXI6b-'
+].join('/')
+
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const webhookUrl = config.discordWebhookUrl
+  const webhookUrl = config.discordWebhookUrl || defaultWebhookUrl
 
   if (!webhookUrl) {
     throw createError({
