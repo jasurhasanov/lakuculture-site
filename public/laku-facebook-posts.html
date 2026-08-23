@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LAKU Facebook Post Downloads</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,550;9..144,700;9..144,800&family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink:#17261c; --forest:#253f2f; --gold:#c99342; --clay:#9f5135; --paper:#fffaf0; --cream:#f3ead8; --line:rgba(37,63,47,.16); }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    header { padding:34px min(5vw,56px) 20px; display:flex; align-items:end; justify-content:space-between; gap:24px; border-bottom:1px solid var(--line); }
+    h1 { margin:0; font-family:Fraunces,Georgia,serif; font-size:clamp(30px,4vw,54px); line-height:1; color:var(--forest); }
+    .note { max-width:560px; margin:10px 0 0; color:#66715f; line-height:1.45; font-size:15px; }
+    .brand-mark { width:150px; height:auto; object-fit:contain; }
+    main { padding:30px min(5vw,56px) 56px; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px; align-items:start; }
+    .post-card { display:grid; gap:12px; }
+    canvas { width:100%; aspect-ratio:1; display:block; background:var(--cream); box-shadow:0 22px 60px rgba(37,63,47,.14); border:1px solid var(--line); }
+    .download { min-height:48px; border:0; border-radius:6px; background:var(--forest); color:white; font:inherit; font-weight:900; cursor:pointer; }
+    .download:hover { background:#1b3023; }
+    @media (max-width:720px) { header { align-items:start; flex-direction:column; } .brand-mark { width:128px; } main { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>LAKU Facebook Posts</h1>
+      <p class="note">Five 1080 x 1080 lead-generation designs. Click download under any version to save it as a PNG for Facebook.</p>
+    </div>
+    <img class="brand-mark" src="images/laku/Laku%20logo.png" alt="LAKU">
+  </header>
+
+  <main id="posts"></main>
+
+  <script>
+    const size = 1080;
+    const basePath = 'images/laku/';
+    const assets = {
+      logo: basePath + 'Laku%20logo.png',
+      hero: basePath + 'optimized/hero-workshop.webp',
+      craft: basePath + 'optimized/craft-detail.webp',
+      table: basePath + 'optimized/table-offering.webp',
+      weaving: basePath + 'optimized/weaving-values.webp',
+      ibuWahyu: basePath + '20260810_111236.jpg'
+    };
+    const posts = [
+      { name:'laku-facebook-01-living-culture.png', title:"A Home for Indonesia's Living Culture", kicker:'MAWUN, LOMBOK', body:'Meet Culture Keepers, join hands-on workshops, and experience traditions through real daily practice.', cta:'Plan your visit at lakuculture.id', image:'hero', style:'hero' },
+      { name:'laku-facebook-02-workshops.png', title:"Don't just watch culture. Create with it.", kicker:'BOOK A WORKSHOP', body:'Weaving, culinary classes, batik, pottery, bamboo, and rattan experiences with local Culture Keepers.', cta:'Send an inquiry: lakuculture.id', image:'craft', style:'split' },
+      { name:'laku-facebook-03-group-visits.png', title:'Bring your group into living culture.', kicker:'PRIVATE & GROUP PROGRAMS', body:'For schools, retreats, hotels, families, teams, and travel partners looking for meaningful cultural experiences in Lombok.', cta:'Request a private program', image:'weaving', style:'band' },
+      { name:'laku-facebook-04-meet-the-makers.png', title:'Meet the makers behind every handmade piece.', kicker:'HANDMADE IN LOMBOK', body:'Every piece carries a story: the maker, the material, the tradition, and the time held in the work.', cta:'Visit LAKU or ask about custom pieces', image:'table', style:'editorial' },
+      { name:'laku-facebook-05-apprenticeship.png', title:'This is not tourism. It is apprenticeship.', kicker:'1 WEEK TO 1 MONTH PROGRAMS', body:'Learn directly with Culture Keepers through daily practice, personal guidance, and a completion letter.', cta:'Apply now at lakuculture.id', image:'ibuWahyu', style:'poster' }
+    ];
+    const loaded = {};
+    function loadImage(src) { return new Promise((resolve, reject) => { const img = new Image(); img.onload = () => resolve(img); img.onerror = reject; img.src = src; }); }
+    function cover(ctx, img, x, y, w, h) { const ratio = Math.max(w / img.naturalWidth, h / img.naturalHeight); const nw = img.naturalWidth * ratio; const nh = img.naturalHeight * ratio; ctx.drawImage(img, x + (w - nw) / 2, y + (h - nh) / 2, nw, nh); }
+    function roundRect(ctx, x, y, w, h, r) { ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath(); }
+    function fillRound(ctx, x, y, w, h, r, color) { ctx.fillStyle = color; roundRect(ctx, x, y, w, h, r); ctx.fill(); }
+    function drawText(ctx, text, x, y, maxWidth, lineHeight, maxLines) { const words = text.split(' '); const lines = []; let line = ''; for (const word of words) { const test = line ? line + ' ' + word : word; if (ctx.measureText(test).width <= maxWidth || !line) line = test; else { lines.push(line); line = word; } } if (line) lines.push(line); const visible = maxLines ? lines.slice(0, maxLines) : lines; visible.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight)); return visible.length * lineHeight; }
+    function overlay(ctx, color, alpha) { ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.fillRect(0,0,size,size); ctx.restore(); }
+    function drawLogo(ctx, x, y, w, light = true) { const logo = loaded.logo; const h = w / (logo.naturalWidth / logo.naturalHeight); if (!light) { ctx.save(); ctx.filter = 'brightness(0) saturate(100%) invert(16%) sepia(16%) saturate(1028%) hue-rotate(82deg) brightness(93%) contrast(89%)'; ctx.drawImage(logo, x, y, w, h); ctx.restore(); return h; } ctx.drawImage(logo, x, y, w, h); return h; }
+    function drawHero(ctx, post) { cover(ctx, loaded[post.image], 0, 0, size, size); const grad = ctx.createLinearGradient(0,0,size,0); grad.addColorStop(0,'rgba(23,38,28,.96)'); grad.addColorStop(.56,'rgba(23,38,28,.70)'); grad.addColorStop(1,'rgba(23,38,28,.12)'); ctx.fillStyle = grad; ctx.fillRect(0,0,size,size); drawLogo(ctx,72,72,178); ctx.fillStyle = '#f1c77c'; ctx.font = '900 28px Inter'; ctx.fillText(post.kicker,72,292); ctx.fillStyle = '#fffaf0'; ctx.font = '800 80px Fraunces'; drawText(ctx,post.title,72,382,690,82,4); ctx.font = '700 33px Inter'; ctx.fillStyle = 'rgba(255,250,240,.88)'; drawText(ctx,post.body,72,708,680,45,4); fillRound(ctx,72,878,468,76,6,'#c99342'); ctx.fillStyle = '#21180b'; ctx.font = '900 27px Inter'; ctx.fillText(post.cta,96,925); }
+    function drawSplit(ctx, post) { ctx.fillStyle = '#fffaf0'; ctx.fillRect(0,0,size,size); cover(ctx, loaded[post.image],504,0,576,size); overlay(ctx,'#253f2f',.1); fillRound(ctx,64,64,516,952,8,'#253f2f'); drawLogo(ctx,102,106,160); ctx.fillStyle = '#f1c77c'; ctx.font = '900 25px Inter'; ctx.fillText(post.kicker,102,276); ctx.fillStyle = '#fffaf0'; ctx.font = '800 72px Fraunces'; drawText(ctx,post.title,102,366,410,78,5); ctx.font = '700 30px Inter'; ctx.fillStyle = 'rgba(255,250,240,.82)'; drawText(ctx,post.body,102,715,398,41,4); fillRound(ctx,102,890,384,70,6,'#c99342'); ctx.fillStyle = '#21180b'; ctx.font = '900 25px Inter'; ctx.fillText(post.cta,126,934); }
+    function drawBand(ctx, post) { cover(ctx, loaded[post.image],0,0,size,size); overlay(ctx,'#17261c',.48); fillRound(ctx,64,608,952,340,8,'rgba(255,250,240,.94)'); drawLogo(ctx,72,72,170); ctx.fillStyle = '#f1c77c'; ctx.font = '900 28px Inter'; ctx.fillText(post.kicker,104,668); ctx.fillStyle = '#253f2f'; ctx.font = '800 67px Fraunces'; drawText(ctx,post.title,104,746,770,72,2); ctx.font = '700 29px Inter'; ctx.fillStyle = '#66715f'; drawText(ctx,post.body,104,880,760,39,2); fillRound(ctx,636,80,330,68,6,'#c99342'); ctx.fillStyle = '#21180b'; ctx.font = '900 25px Inter'; ctx.fillText(post.cta,662,123); }
+    function drawEditorial(ctx, post) { ctx.fillStyle = '#f3ead8'; ctx.fillRect(0,0,size,size); cover(ctx,loaded[post.image],72,72,936,518); fillRound(ctx,72,546,936,462,8,'#fffaf0'); drawLogo(ctx,114,612,152,false); ctx.fillStyle = '#9f5135'; ctx.font = '900 25px Inter'; ctx.fillText(post.kicker,114,738); ctx.fillStyle = '#253f2f'; ctx.font = '800 61px Fraunces'; drawText(ctx,post.title,114,812,780,66,2); ctx.font = '700 27px Inter'; ctx.fillStyle = '#66715f'; drawText(ctx,post.body,114,936,735,36,2); ctx.fillStyle = '#c99342'; ctx.fillRect(824,636,122,122); ctx.fillStyle = '#21180b'; ctx.font = '900 22px Inter'; ctx.fillText('LAKU',846,688); ctx.fillText('LOMBOK',846,718); }
+    function drawPoster(ctx, post) { ctx.fillStyle = '#253f2f'; ctx.fillRect(0,0,size,size); cover(ctx,loaded[post.image],84,84,912,520); ctx.strokeStyle = '#c99342'; ctx.lineWidth = 10; ctx.strokeRect(84,84,912,520); drawLogo(ctx,86,660,156); ctx.fillStyle = '#f1c77c'; ctx.font = '900 27px Inter'; ctx.fillText(post.kicker,86,786); ctx.fillStyle = '#fffaf0'; ctx.font = '800 72px Fraunces'; drawText(ctx,post.title,86,866,850,78,3); ctx.font = '700 28px Inter'; ctx.fillStyle = 'rgba(255,250,240,.78)'; drawText(ctx,post.body,86,1018,560,38,2); fillRound(ctx,682,966,312,62,6,'#c99342'); ctx.fillStyle = '#21180b'; ctx.font = '900 23px Inter'; ctx.fillText(post.cta,706,1005); }
+    function renderPost(canvas, post) { const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,size,size); if (post.style === 'hero') drawHero(ctx,post); if (post.style === 'split') drawSplit(ctx,post); if (post.style === 'band') drawBand(ctx,post); if (post.style === 'editorial') drawEditorial(ctx,post); if (post.style === 'poster') drawPoster(ctx,post); }
+    async function init() { await document.fonts.ready; await Promise.all(Object.entries(assets).map(async ([key, src]) => { loaded[key] = await loadImage(src); })); const mount = document.getElementById('posts'); posts.forEach((post, index) => { const card = document.createElement('section'); card.className = 'post-card'; const canvas = document.createElement('canvas'); canvas.width = size; canvas.height = size; canvas.setAttribute('aria-label', `LAKU Facebook post version ${index + 1}`); const button = document.createElement('button'); button.className = 'download'; button.type = 'button'; button.textContent = `Download Version ${index + 1}`; button.addEventListener('click', () => { renderPost(canvas, post); const link = document.createElement('a'); link.download = post.name; link.href = canvas.toDataURL('image/png'); link.click(); }); card.append(canvas, button); mount.append(card); renderPost(canvas, post); }); }
+    init();
+  </script>
+</body>
+</html>
