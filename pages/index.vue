@@ -187,7 +187,7 @@
               <li>Product name, Culture Keeper name, and maker photograph</li>
               <li>Making process photographs and tradition story</li>
               <li>Local materials and approximate time required to create</li>
-              <li>Ask about shop visits, questions, commissions, and special orders</li>
+              <li>Ask about shop visits, handmade pieces, and custom orders</li>
             </ul>
             <a class="button secondary dark" href="#inquiry">Ask About a Piece</a>
           </div>
@@ -222,7 +222,7 @@
             <h2>Tell us what you want to experience.</h2>
             <p>
               Ask about workshops, apprenticeships, group visits, handmade products,
-              commissions, or custom cultural programs. Share your dates and group
+              made-to-order pieces, or custom cultural programs. Share your dates and group
               details, and the LAKU team will follow up with availability.
             </p>
           </div>
@@ -243,7 +243,7 @@
                 <option>Book a workshop</option>
                 <option>Apply for apprenticeship</option>
                 <option>Plan a group program</option>
-                <option>Ask about products or commissions</option>
+                <option>Ask about products or custom orders</option>
                 <option>Custom cultural program</option>
               </select>
             </label>
@@ -340,7 +340,7 @@ const services = [
   'Hotel and travel partner experiences',
   'Retreat cultural sessions',
   'Custom cultural delegations',
-  'Product commissions'
+  'Made-to-order handmade pieces'
 ]
 
 const form = reactive({
