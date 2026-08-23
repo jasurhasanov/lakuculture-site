@@ -8,14 +8,14 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: "Laku | Live Indonesia Through Its Traditions",
+      title: "LAKU | A Home for Indonesia's Living Culture",
       htmlAttrs: {
         lang: "en"
       },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "Laku is an immersive Indonesian cultural experience in Mawun, Lombok, where guests taste, create, listen, and participate in living traditions." },
+        { name: "description", content: "LAKU is a living cultural space in Mawun, Lombok, offering daily Culture Keeper experiences, paid workshops, apprenticeships, handmade products, and private programs." },
         { name: "theme-color", content: "#253f2f" }
       ],
       link: [
