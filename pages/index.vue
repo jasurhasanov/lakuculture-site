@@ -49,7 +49,7 @@
         <div class="shell intro-layout">
           <div class="image-frame" />
           <div class="intro-card">
-            <p class="eyebrow dark-text">The LAKU model</p>
+            <p class="eyebrow dark-text">Inside LAKU</p>
             <h2>Visitors do not just watch culture. They enter its rhythm.</h2>
             <p>
               Culture Keepers are present during opening hours, practicing their craft,
