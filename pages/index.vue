@@ -93,8 +93,8 @@
             <p class="eyebrow dark-text">This week at LAKU</p>
             <h2>Reliability is part of the experience.</h2>
             <p class="section-copy">
-              The site should show who visitors will meet each day, so the space feels
-              alive before they arrive.
+              See which Culture Keeper is practicing each day and arrive knowing what
+              tradition you can observe, try, or learn more deeply.
             </p>
           </div>
           <div class="schedule-list">
@@ -111,12 +111,12 @@
           <div class="section-head values-head">
             <div>
               <p class="eyebrow">Create with Culture Keepers</p>
-              <h2>Launch fewer workshops, make them excellent.</h2>
+              <h2>Two signature workshops to begin with.</h2>
             </div>
             <p>
-              The first release should sell two polished workshops and preview future
-              traditions as coming soon. Each workshop states duration, price, what guests
-              create, what they take home, age guidance, and the Culture Keeper.
+              Choose between bamboo weaving and batik wax drawing, each guided by a
+              Culture Keeper with clear details before you book: duration, price, age
+              guidance, what you create, and what you take home.
             </p>
           </div>
 
@@ -160,8 +160,8 @@
             <p class="eyebrow dark-text">Culture Keepers</p>
             <h2>Tradition holders, not performers.</h2>
             <p>
-              Each profile should connect the person, the practice, the products, and the
-              learning opportunities they host.
+              Meet the people who carry these practices through daily making,
+              conversation, workshops, products, and longer apprenticeship programs.
             </p>
           </div>
           <div class="keeper-grid">
@@ -182,12 +182,12 @@
             <h2>Products are not souvenirs. Every object carries a story.</h2>
           </div>
           <div class="product-card">
-            <h3>Product story format</h3>
+            <h3>Know the maker behind the piece.</h3>
             <ul>
               <li>Object name, Culture Keeper name, and maker photograph</li>
               <li>Making process photographs and tradition story</li>
               <li>Local materials and approximate time required to create</li>
-              <li>Lead CTA for shop visits, questions, commissions, and special orders</li>
+              <li>Ask about shop visits, questions, commissions, and special orders</li>
             </ul>
             <a class="button secondary dark" href="#inquiry">Ask About a Piece</a>
           </div>
@@ -199,7 +199,7 @@
           <div class="section-head values-head">
             <div>
               <p class="eyebrow dark-text">Private and group programs</p>
-              <h2>Revenue beyond walk-ins.</h2>
+              <h2>Bring your group into living culture.</h2>
             </div>
             <p>
               LAKU can serve schools, companies, hotels, retreats, families, cultural
@@ -219,11 +219,11 @@
         <div class="shell inquiry-grid">
           <div>
             <p class="eyebrow">Start here</p>
-            <h2>Turn interest into a lead.</h2>
+            <h2>Tell us what you want to experience.</h2>
             <p>
-              Use this form for workshops, apprenticeships, group visits, product
-              questions, and custom programs. It opens a structured email for now and can
-              later connect to CRM, WhatsApp, or a booking system.
+              Ask about workshops, apprenticeships, group visits, handmade products,
+              commissions, or custom cultural programs. The LAKU team will follow up
+              with details and availability.
             </p>
           </div>
 
@@ -315,9 +315,9 @@ const schedule = [
 ]
 
 const workshops = [
-  { status: 'Opening workshop', title: 'Bamboo Weaving Introduction', meta: '90 minutes / beginner friendly', points: ['Create a small woven piece', 'Learn material preparation and simple patterns', 'Take home your handmade object'], cta: 'Book This Workshop' },
-  { status: 'Opening workshop', title: 'Batik Wax Lines', meta: '2 hours / ages 10+', points: ['Draw wax lines with a canting', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Book This Workshop' },
-  { status: 'Coming soon', title: 'Pottery, Rattan, Weaving, and Culinary', meta: 'One new workshop added each month', points: ['Quality before quantity', 'Each launch becomes a marketing story', 'Visitors can join the waiting list'], cta: 'Join the Waitlist' }
+  { status: 'Available to book', title: 'Bamboo Weaving Introduction', meta: '90 minutes / price shared on inquiry / beginner friendly', points: ['Create a small woven piece with a Bamboo Culture Keeper', 'Learn material preparation and simple patterns', 'Take home your handmade object'], cta: 'Book This Workshop' },
+  { status: 'Available to book', title: 'Batik Wax Lines', meta: '2 hours / price shared on inquiry / ages 10+', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Book This Workshop' },
+  { status: 'Coming soon', title: 'Pottery, Rattan, Weaving, and Culinary', meta: 'Future workshops / join the waitlist', points: ['Preview the next traditions opening at LAKU', 'Hear when new workshop dates are ready', 'Plan a private group session around your interests'], cta: 'Join the Waitlist' }
 ]
 
 const programs = ['1 week', '2 weeks', '3 weeks', '1 month']
