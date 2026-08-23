@@ -183,10 +183,10 @@
           <div class="product-card">
             <h3>Know the maker behind the piece.</h3>
             <ul>
-              <li>Product name, Culture Keeper name, and maker photograph</li>
-              <li>Making process photographs and tradition story</li>
-              <li>Local materials and approximate time required to create</li>
-              <li>Ask about shop visits, handmade pieces, and custom orders</li>
+              <li>Meet the Culture Keeper behind each handmade piece</li>
+              <li>See the making process and the tradition carried through it</li>
+              <li>Understand the local materials and time behind the craft</li>
+              <li>Plan a shop visit, choose a handmade piece, or request a custom order</li>
             </ul>
             <a class="button secondary dark" href="#inquiry">Ask About a Piece</a>
           </div>
