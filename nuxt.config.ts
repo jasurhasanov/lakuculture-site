@@ -24,6 +24,15 @@ export default defineNuxtConfig({
       link: [
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
+      ],
+      script: [
+        {
+          src: "https://www.googletagmanager.com/gtag/js?id=G-Y3DN21N4S1",
+          async: true
+        },
+        {
+          innerHTML: "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-Y3DN21N4S1');"
+        }
       ]
     }
   }
