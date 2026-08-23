@@ -161,6 +161,7 @@
               <span>{{ keeper.tradition }}</span>
               <h3>{{ keeper.name }}</h3>
               <p>{{ keeper.copy }}</p>
+              <p v-if="keeper.description" class="keeper-description">{{ keeper.description }}</p>
               <div v-if="keeper.items" class="keeper-list">
                 <p v-for="item in keeper.items" :key="item.title">
                   <strong>{{ item.title }}</strong>
@@ -362,6 +363,7 @@ const keepers = [
     tradition: 'Textile Weaving',
     name: 'Nyensek Weaving Culture Keeper',
     copy: 'Ibu Wahyu',
+    description: 'Introduces Nyensek weaving through traditional Lombok textile patterns, loom practice, and the stories held in each thread.',
     image: '/images/laku/20260810_111236.jpg',
     alt: 'Ibu Wahyu, Nyensek Weaving Culture Keeper',
     cta: 'Learn with Ibu Wahyu'
@@ -370,6 +372,7 @@ const keepers = [
     tradition: 'Natural-Fiber Weaving',
     name: 'Traditional Anyaman Culture Keeper',
     copy: 'Pak Yusuf',
+    description: 'Introduces traditional anyaman through natural fibers, handwoven forms, and practical skills passed through daily making.',
     image: '/images/laku/20260816_090306.jpg',
     alt: 'Pak Yusuf, Traditional Anyaman Culture Keeper',
     cta: 'Learn with Pak Yusuf'
@@ -378,6 +381,7 @@ const keepers = [
     tradition: 'Culinary',
     name: 'Traditional Culinary Keeper',
     copy: 'Ibu Noni',
+    description: 'Introduces Indonesian drinks, spices, sweets, and local hospitality through taste.',
     image: '/images/laku/20251008_091302.jpg',
     alt: 'Ibu Noni, Traditional Culinary Keeper',
     cta: 'Learn with Ibu Noni'
