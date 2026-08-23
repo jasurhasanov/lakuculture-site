@@ -256,7 +256,37 @@
             <div class="form-row">
               <label>
                 Preferred dates
-                <input v-model="form.dates" type="text" placeholder="Flexible" />
+                <div class="date-picker">
+                  <button class="date-picker-trigger" type="button" @click="toggleDatePicker">
+                    {{ selectedDateLabel }}
+                  </button>
+                  <div v-if="isDatePickerOpen" class="date-picker-panel">
+                    <div class="date-picker-head">
+                      <button type="button" aria-label="Previous month" @click="goToPreviousMonth">&lt;</button>
+                      <strong>{{ monthLabel }}</strong>
+                      <button type="button" aria-label="Next month" @click="goToNextMonth">&gt;</button>
+                    </div>
+                    <div class="date-picker-weekdays">
+                      <span v-for="day in weekdays" :key="day">{{ day }}</span>
+                    </div>
+                    <div class="date-picker-days">
+                      <button
+                        v-for="day in calendarDays"
+                        :key="day.key"
+                        type="button"
+                        :class="{ muted: !day.inCurrentMonth, selected: selectedDates.includes(day.value) }"
+                        @click="toggleSelectedDate(day.value)"
+                      >
+                        {{ day.label }}
+                      </button>
+                    </div>
+                    <div v-if="selectedDates.length" class="selected-dates">
+                      <button v-for="date in selectedDates" :key="date" type="button" @click="toggleSelectedDate(date)">
+                        {{ formatShortDate(date) }} x
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </label>
               <label>
                 Group size
@@ -355,14 +385,90 @@ const form = reactive({
   email: '',
   whatsapp: '',
   interest: '',
-  dates: '',
   groupSize: '',
   message: ''
 })
 
+type CalendarDay = {
+  key: string
+  value: string
+  label: number
+  inCurrentMonth: boolean
+}
+
 const isSubmitting = ref(false)
 const submitStatus = ref<'success' | 'error' | ''>('')
 const submitMessage = ref('')
+const isDatePickerOpen = ref(false)
+const visibleMonth = ref(new Date(new Date().getFullYear(), new Date().getMonth(), 1))
+const selectedDates = ref<string[]>([])
+const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+const toDateValue = (date: Date) => {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
+const formatDisplayDate = (value: string, options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', year: 'numeric' }) => {
+  const [year, month, day] = value.split('-').map(Number)
+  return new Intl.DateTimeFormat('en', options).format(new Date(year, month - 1, day))
+}
+
+const formatShortDate = (value: string) => formatDisplayDate(value, { month: 'short', day: 'numeric' })
+
+const selectedDateLabel = computed(() => {
+  if (!selectedDates.value.length) return 'Flexible / choose dates'
+  if (selectedDates.value.length === 1) return formatDisplayDate(selectedDates.value[0])
+  return `${selectedDates.value.length} dates selected`
+})
+
+const monthLabel = computed(() => new Intl.DateTimeFormat('en', { month: 'long', year: 'numeric' }).format(visibleMonth.value))
+
+const calendarDays = computed<CalendarDay[]>(() => {
+  const year = visibleMonth.value.getFullYear()
+  const month = visibleMonth.value.getMonth()
+  const firstDay = new Date(year, month, 1)
+  const startDate = new Date(firstDay)
+  startDate.setDate(firstDay.getDate() - firstDay.getDay())
+
+  return Array.from({ length: 42 }, (_, index) => {
+    const date = new Date(startDate)
+    date.setDate(startDate.getDate() + index)
+    const value = toDateValue(date)
+
+    return {
+      key: value,
+      value,
+      label: date.getDate(),
+      inCurrentMonth: date.getMonth() === month
+    }
+  })
+})
+
+const toggleDatePicker = () => {
+  isDatePickerOpen.value = !isDatePickerOpen.value
+}
+
+const goToPreviousMonth = () => {
+  visibleMonth.value = new Date(visibleMonth.value.getFullYear(), visibleMonth.value.getMonth() - 1, 1)
+}
+
+const goToNextMonth = () => {
+  visibleMonth.value = new Date(visibleMonth.value.getFullYear(), visibleMonth.value.getMonth() + 1, 1)
+}
+
+const toggleSelectedDate = (value: string) => {
+  if (selectedDates.value.includes(value)) {
+    selectedDates.value = selectedDates.value.filter((date) => date !== value)
+    return
+  }
+
+  selectedDates.value = [...selectedDates.value, value].sort()
+}
+
+const selectedDatesForSubmission = computed(() => selectedDates.value.map((date) => formatDisplayDate(date)).join(', '))
 
 const handleInquiry = async () => {
   isSubmitting.value = true
@@ -379,7 +485,7 @@ const handleInquiry = async () => {
   try {
     await $fetch('/api/inquiry', {
       method: 'POST',
-      body: { ...form }
+      body: { ...form, dates: selectedDatesForSubmission.value }
     })
 
     submitStatus.value = 'success'
@@ -389,10 +495,11 @@ const handleInquiry = async () => {
       email: '',
       whatsapp: '',
       interest: '',
-      dates: '',
       groupSize: '',
       message: ''
     })
+    selectedDates.value = []
+    isDatePickerOpen.value = false
   } catch {
     submitStatus.value = 'error'
     submitMessage.value = 'Sorry, the inquiry could not be sent. Please try again or contact LAKU directly.'
@@ -403,5 +510,5 @@ const handleInquiry = async () => {
 </script>
 
 <style scoped>
-.laku-page{--ink:#1a2118;--muted:#66715f;--forest:#253f2f;--leaf:#537b45;--gold:#c99342;--clay:#9f5135;--paper:#fffaf0;--cream:#f3ead8;--line:rgba(37,63,47,.15);--shadow:0 24px 80px rgba(37,63,47,.18);margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.laku-page *{box-sizing:border-box}.laku-page a{color:inherit;text-decoration:none}.shell{width:min(1160px,calc(100% - 40px));margin:0 auto}.nav{position:fixed;top:0;left:0;right:0;z-index:20;color:white;background:rgba(37,63,47,.86);border-bottom:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px)}.nav-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:rgba(255,255,255,.12);font-family:Fraunces,Georgia,serif;font-weight:760}.nav-links{display:flex;gap:24px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.nav-links a{opacity:.84}.nav-links a:hover{opacity:1}.nav-cta{display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:4px;background:var(--gold);color:#21180b;font-weight:800;font-size:13px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:4px;border:1px solid transparent;background:var(--gold);color:#21180b;font-weight:800;cursor:pointer}.button:disabled{opacity:.68;cursor:not-allowed}.button.secondary{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.36);color:white}.button.secondary.dark{background:var(--forest);color:white;border-color:var(--forest)}.button.small{min-height:44px;padding:0 16px;font-size:14px}.text-link{display:inline-flex;align-items:center;font-weight:800;color:white}.hero{min-height:94vh;display:grid;align-items:end;padding:118px 0 54px;color:white;background:linear-gradient(90deg,rgba(21,32,23,.92),rgba(21,32,23,.58) 52%,rgba(21,32,23,.12)),linear-gradient(0deg,rgba(21,32,23,.82),rgba(21,32,23,.04) 46%),url("/images/laku/optimized/hero-workshop.webp") center/cover}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:52px;align-items:end}.hero-copy{max-width:820px}.eyebrow{margin:0 0 16px;color:#f1c77c;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.dark-text{color:var(--clay)}.laku-page h1,.laku-page h2,.laku-page h3{margin:0;letter-spacing:0;line-height:1.03}.laku-page h1,.laku-page h2{font-family:Fraunces,Georgia,serif}.laku-page h1{font-size:clamp(50px,7vw,98px);font-weight:760;max-width:860px}.laku-page h2{font-size:clamp(34px,4.8vw,62px);font-weight:650;color:var(--forest)}.laku-page h3{font-size:24px;color:var(--forest)}.hero-lead{max-width:720px;margin:24px 0 0;color:rgba(255,255,255,.84);font-size:clamp(18px,2vw,22px)}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.hero-panel{min-height:460px;border-radius:8px;background:linear-gradient(0deg,rgba(37,63,47,.15),rgba(37,63,47,.15)),url("/images/laku/optimized/table-offering.webp") center/cover;box-shadow:var(--shadow);display:flex;align-items:flex-end;padding:18px}.panel-card{width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);backdrop-filter:blur(12px)}.panel-card span{padding:18px;font-family:Fraunces,Georgia,serif;font-size:24px;font-weight:650}.intro-band,.pathway-section,.schedule-section,.keepers-section,.groups-section,.inquiry-section{padding:96px 0}.intro-band,.visit-section{background:var(--cream)}.intro-layout,.split,.product-layout,.inquiry-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}.image-frame{min-height:560px;border-radius:8px;background:linear-gradient(0deg,rgba(37,63,47,.1),rgba(37,63,47,.1)),url("/images/laku/optimized/craft-detail.webp") center/cover;box-shadow:var(--shadow)}.intro-card,.product-card,.inquiry-form{padding:40px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.intro-card p,.section-copy{color:var(--muted);font-size:18px}.section-head{max-width:780px}.section-head.centered{margin:0 auto 48px;text-align:center}.section-head p{margin:16px 0 0;color:var(--muted);font-size:18px}.pathway-grid,.keeper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.pathway-card,.keeper-card,.service-card{padding:26px;border:1px solid var(--line);border-radius:8px;background:white}.pathway-card{min-height:300px;display:flex;flex-direction:column}.pathway-card span,.workshop-card p,.keeper-card span{color:var(--clay);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.pathway-card p,.keeper-card p,.product-card li,.workshop-card li{color:var(--muted)}.pathway-card a,.keeper-card a{margin-top:auto;color:var(--forest);font-weight:800}.schedule-list{display:grid;gap:10px}.schedule-row{display:flex;justify-content:space-between;gap:18px;padding:18px 20px;border-left:4px solid var(--gold);background:white}.schedule-row strong{color:var(--forest)}.workshop-section,.apprentice-section{padding:108px 0;background:var(--forest);color:white}.workshop-section h2,.workshop-section h3,.apprentice-section h2{color:white}.values-head{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:end;margin-bottom:42px}.values-head p{color:rgba(255,255,255,.72)}.groups-section .values-head p{color:var(--muted)}.workshop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.workshop-card{min-height:380px;padding:28px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.08);display:flex;flex-direction:column;gap:22px}.workshop-card span{color:rgba(255,255,255,.72)}.workshop-card ul,.product-card ul{padding-left:18px}.workshop-card li{color:rgba(255,255,255,.72);margin:8px 0}.workshop-card .button{margin-top:auto;align-self:flex-start}.apprentice-panel{padding:64px;border-radius:8px;background:linear-gradient(90deg,rgba(37,63,47,.9),rgba(37,63,47,.64)),url("/images/laku/optimized/weaving-values.webp") center/cover;box-shadow:var(--shadow)}.apprentice-panel p{max-width:820px;color:rgba(255,255,255,.78);font-size:19px}.program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:34px 0}.program-grid span{padding:22px;text-align:center;border:1px solid rgba(255,255,255,.24);border-radius:8px;background:rgba(255,255,255,.1);font-family:Fraunces,Georgia,serif;font-size:26px}.products-section{padding:96px 0;background:linear-gradient(90deg,rgba(37,63,47,.92),rgba(37,63,47,.68)),url("/images/laku/optimized/table-offering.webp") center/cover;color:white}.products-section h2,.products-section h3{color:white}.product-card{background:rgba(255,255,255,.94)}.product-card h3{color:var(--forest)}.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.service-card{min-height:110px;display:flex;align-items:flex-end;color:var(--forest);font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:650}.inquiry-section{background:var(--forest);color:white}.inquiry-section h2{color:white}.inquiry-section p{color:rgba(255,255,255,.76);font-size:19px}.inquiry-form{display:grid;gap:16px;background:var(--paper);color:var(--ink)}.inquiry-form label{display:grid;gap:8px;font-weight:800;font-size:13px;color:var(--forest)}.inquiry-form input,.inquiry-form select,.inquiry-form textarea{width:100%;border:1px solid var(--line);border-radius:4px;background:white;padding:12px 14px;color:var(--ink);font:inherit}.form-status{margin:0;font-size:14px;font-weight:800}.form-status.success{color:var(--leaf)}.form-status.error{color:var(--clay)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.laku-page footer{padding:34px 0;background:#17261c;color:rgba(255,255,255,.72)}.footer-inner{display:flex;justify-content:space-between;gap:18px;align-items:center}.footer-inner strong{color:white;font-size:20px}.footer-inner a{font-weight:700;color:white}@media (max-width:980px){.nav-links{display:none}.hero-grid,.intro-layout,.split,.product-layout,.inquiry-grid,.values-head{grid-template-columns:1fr;gap:32px}.hero{min-height:auto;padding-top:120px}.hero-panel{min-height:360px}.pathway-grid,.keeper-grid,.workshop-grid,.service-grid{grid-template-columns:repeat(2,1fr)}.image-frame{min-height:420px}}@media (max-width:640px){.shell{width:min(100% - 28px,1160px)}.nav-inner{min-height:64px}.laku-page h1{font-size:45px}.hero-actions,.button{width:100%}.hero-panel{min-height:300px}.intro-band,.pathway-section,.schedule-section,.keepers-section,.groups-section,.inquiry-section,.workshop-section,.apprentice-section,.products-section{padding:72px 0}.intro-card,.product-card,.inquiry-form,.apprentice-panel{padding:28px}.pathway-grid,.keeper-grid,.workshop-grid,.service-grid,.program-grid,.form-row{grid-template-columns:1fr}.schedule-row{display:grid}.footer-inner{align-items:flex-start;flex-direction:column}}
+.laku-page{--ink:#1a2118;--muted:#66715f;--forest:#253f2f;--leaf:#537b45;--gold:#c99342;--clay:#9f5135;--paper:#fffaf0;--cream:#f3ead8;--line:rgba(37,63,47,.15);--shadow:0 24px 80px rgba(37,63,47,.18);margin:0;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}.laku-page *{box-sizing:border-box}.laku-page a{color:inherit;text-decoration:none}.shell{width:min(1160px,calc(100% - 40px));margin:0 auto}.nav{position:fixed;top:0;left:0;right:0;z-index:20;color:white;background:rgba(37,63,47,.86);border-bottom:1px solid rgba(255,255,255,.16);backdrop-filter:blur(18px)}.nav-inner{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}.brand-mark{display:grid;place-items:center;width:38px;height:38px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:rgba(255,255,255,.12);font-family:Fraunces,Georgia,serif;font-weight:760}.nav-links{display:flex;gap:24px;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.nav-links a{opacity:.84}.nav-links a:hover{opacity:1}.nav-cta{display:inline-flex;align-items:center;min-height:38px;padding:0 16px;border-radius:4px;background:var(--gold);color:#21180b;font-weight:800;font-size:13px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 22px;border-radius:4px;border:1px solid transparent;background:var(--gold);color:#21180b;font-weight:800;cursor:pointer}.button:disabled{opacity:.68;cursor:not-allowed}.button.secondary{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.36);color:white}.button.secondary.dark{background:var(--forest);color:white;border-color:var(--forest)}.button.small{min-height:44px;padding:0 16px;font-size:14px}.text-link{display:inline-flex;align-items:center;font-weight:800;color:white}.hero{min-height:94vh;display:grid;align-items:end;padding:118px 0 54px;color:white;background:linear-gradient(90deg,rgba(21,32,23,.92),rgba(21,32,23,.58) 52%,rgba(21,32,23,.12)),linear-gradient(0deg,rgba(21,32,23,.82),rgba(21,32,23,.04) 46%),url("/images/laku/optimized/hero-workshop.webp") center/cover}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:52px;align-items:end}.hero-copy{max-width:820px}.eyebrow{margin:0 0 16px;color:#f1c77c;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.dark-text{color:var(--clay)}.laku-page h1,.laku-page h2,.laku-page h3{margin:0;letter-spacing:0;line-height:1.03}.laku-page h1,.laku-page h2{font-family:Fraunces,Georgia,serif}.laku-page h1{font-size:clamp(50px,7vw,98px);font-weight:760;max-width:860px}.laku-page h2{font-size:clamp(34px,4.8vw,62px);font-weight:650;color:var(--forest)}.laku-page h3{font-size:24px;color:var(--forest)}.hero-lead{max-width:720px;margin:24px 0 0;color:rgba(255,255,255,.84);font-size:clamp(18px,2vw,22px)}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}.hero-panel{min-height:460px;border-radius:8px;background:linear-gradient(0deg,rgba(37,63,47,.15),rgba(37,63,47,.15)),url("/images/laku/optimized/table-offering.webp") center/cover;box-shadow:var(--shadow);display:flex;align-items:flex-end;padding:18px}.panel-card{width:100%;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);backdrop-filter:blur(12px)}.panel-card span{padding:18px;font-family:Fraunces,Georgia,serif;font-size:24px;font-weight:650}.intro-band,.pathway-section,.schedule-section,.keepers-section,.groups-section,.inquiry-section{padding:96px 0}.intro-band,.visit-section{background:var(--cream)}.intro-layout,.split,.product-layout,.inquiry-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}.image-frame{min-height:560px;border-radius:8px;background:linear-gradient(0deg,rgba(37,63,47,.1),rgba(37,63,47,.1)),url("/images/laku/optimized/craft-detail.webp") center/cover;box-shadow:var(--shadow)}.intro-card,.product-card,.inquiry-form{padding:40px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.intro-card p,.section-copy{color:var(--muted);font-size:18px}.section-head{max-width:780px}.section-head.centered{margin:0 auto 48px;text-align:center}.section-head p{margin:16px 0 0;color:var(--muted);font-size:18px}.pathway-grid,.keeper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.pathway-card,.keeper-card,.service-card{padding:26px;border:1px solid var(--line);border-radius:8px;background:white}.pathway-card{min-height:300px;display:flex;flex-direction:column}.pathway-card span,.workshop-card p,.keeper-card span{color:var(--clay);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.pathway-card p,.keeper-card p,.product-card li,.workshop-card li{color:var(--muted)}.pathway-card a,.keeper-card a{margin-top:auto;color:var(--forest);font-weight:800}.schedule-list{display:grid;gap:10px}.schedule-row{display:flex;justify-content:space-between;gap:18px;padding:18px 20px;border-left:4px solid var(--gold);background:white}.schedule-row strong{color:var(--forest)}.workshop-section,.apprentice-section{padding:108px 0;background:var(--forest);color:white}.workshop-section h2,.workshop-section h3,.apprentice-section h2{color:white}.values-head{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:end;margin-bottom:42px}.values-head p{color:rgba(255,255,255,.72)}.groups-section .values-head p{color:var(--muted)}.workshop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.workshop-card{min-height:380px;padding:28px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.08);display:flex;flex-direction:column;gap:22px}.workshop-card span{color:rgba(255,255,255,.72)}.workshop-card ul,.product-card ul{padding-left:18px}.workshop-card li{color:rgba(255,255,255,.72);margin:8px 0}.workshop-card .button{margin-top:auto;align-self:flex-start}.apprentice-panel{padding:64px;border-radius:8px;background:linear-gradient(90deg,rgba(37,63,47,.9),rgba(37,63,47,.64)),url("/images/laku/optimized/weaving-values.webp") center/cover;box-shadow:var(--shadow)}.apprentice-panel p{max-width:820px;color:rgba(255,255,255,.78);font-size:19px}.program-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:34px 0}.program-grid span{padding:22px;text-align:center;border:1px solid rgba(255,255,255,.24);border-radius:8px;background:rgba(255,255,255,.1);font-family:Fraunces,Georgia,serif;font-size:26px}.products-section{padding:96px 0;background:linear-gradient(90deg,rgba(37,63,47,.92),rgba(37,63,47,.68)),url("/images/laku/optimized/table-offering.webp") center/cover;color:white}.products-section h2,.products-section h3{color:white}.product-card{background:rgba(255,255,255,.94)}.product-card h3{color:var(--forest)}.service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.service-card{min-height:110px;display:flex;align-items:flex-end;color:var(--forest);font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:650}.inquiry-section{background:var(--forest);color:white}.inquiry-section h2{color:white}.inquiry-section p{color:rgba(255,255,255,.76);font-size:19px}.inquiry-form{display:grid;gap:16px;background:var(--paper);color:var(--ink)}.inquiry-form label{display:grid;gap:8px;font-weight:800;font-size:13px;color:var(--forest)}.inquiry-form input,.inquiry-form select,.inquiry-form textarea{width:100%;border:1px solid var(--line);border-radius:4px;background:white;padding:12px 14px;color:var(--ink);font:inherit}.date-picker{position:relative}.date-picker-trigger{width:100%;min-height:47px;border:1px solid var(--line);border-radius:4px;background:white;padding:12px 14px;color:var(--ink);font:inherit;text-align:left;cursor:pointer}.date-picker-panel{position:absolute;z-index:10;top:calc(100% + 8px);left:0;width:min(340px,calc(100vw - 56px));padding:14px;border:1px solid var(--line);border-radius:8px;background:white;box-shadow:0 18px 48px rgba(26,33,24,.18)}.date-picker-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.date-picker-head button{width:34px;height:34px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--forest);font:inherit;font-weight:800;cursor:pointer}.date-picker-head strong{color:var(--forest);font-size:14px}.date-picker-weekdays,.date-picker-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.date-picker-weekdays span{color:var(--muted);font-size:11px;text-align:center}.date-picker-days button{aspect-ratio:1;border:0;border-radius:4px;background:transparent;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}.date-picker-days button:hover{background:var(--cream)}.date-picker-days button.muted{color:#a2aa9d}.date-picker-days button.selected{background:var(--forest);color:white;font-weight:800}.selected-dates{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.selected-dates button{border:1px solid var(--line);border-radius:999px;background:var(--cream);padding:6px 9px;color:var(--forest);font:inherit;font-size:12px;font-weight:800;cursor:pointer}.form-status{margin:0;font-size:14px;font-weight:800}.form-status.success{color:var(--leaf)}.form-status.error{color:var(--clay)}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.laku-page footer{padding:34px 0;background:#17261c;color:rgba(255,255,255,.72)}.footer-inner{display:flex;justify-content:space-between;gap:18px;align-items:center}.footer-inner strong{color:white;font-size:20px}.footer-inner a{font-weight:700;color:white}@media (max-width:980px){.nav-links{display:none}.hero-grid,.intro-layout,.split,.product-layout,.inquiry-grid,.values-head{grid-template-columns:1fr;gap:32px}.hero{min-height:auto;padding-top:120px}.hero-panel{min-height:360px}.pathway-grid,.keeper-grid,.workshop-grid,.service-grid{grid-template-columns:repeat(2,1fr)}.image-frame{min-height:420px}}@media (max-width:640px){.shell{width:min(100% - 28px,1160px)}.nav-inner{min-height:64px}.laku-page h1{font-size:45px}.hero-actions,.button{width:100%}.hero-panel{min-height:300px}.intro-band,.pathway-section,.schedule-section,.keepers-section,.groups-section,.inquiry-section,.workshop-section,.apprentice-section,.products-section{padding:72px 0}.intro-card,.product-card,.inquiry-form,.apprentice-panel{padding:28px}.pathway-grid,.keeper-grid,.workshop-grid,.service-grid,.program-grid,.form-row{grid-template-columns:1fr}.schedule-row{display:grid}.footer-inner{align-items:flex-start;flex-direction:column}}
 </style>
