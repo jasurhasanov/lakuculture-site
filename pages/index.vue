@@ -179,12 +179,12 @@
         <div class="shell product-layout">
           <div>
             <p class="eyebrow">Handmade products</p>
-            <h2>Products are not souvenirs. Every object carries a story.</h2>
+            <h2>Products are not souvenirs. Every handmade piece carries a story.</h2>
           </div>
           <div class="product-card">
             <h3>Know the maker behind the piece.</h3>
             <ul>
-              <li>Object name, Culture Keeper name, and maker photograph</li>
+              <li>Product name, Culture Keeper name, and maker photograph</li>
               <li>Making process photographs and tradition story</li>
               <li>Local materials and approximate time required to create</li>
               <li>Ask about shop visits, questions, commissions, and special orders</li>
@@ -300,7 +300,7 @@ useHead({
 const levels = [
   { kicker: 'Level 1', title: 'Observe', copy: 'Visitors are welcome to watch, ask questions, enjoy the atmosphere, and meet the active Culture Keeper for free.', cta: 'Plan Your Visit', href: '#inquiry' },
   { kicker: 'Level 2', title: 'Experience', copy: 'A complimentary hands-on introduction gives guests a few minutes with bamboo, clay, batik, rattan, weaving, or culinary practice.', cta: 'See Daily Schedule', href: '#visit' },
-  { kicker: 'Level 3', title: 'Create', copy: 'Paid workshops guide visitors through a complete handmade object with a clear duration, price, take-home outcome, and story.', cta: 'Book a Workshop', href: '#workshops' },
+  { kicker: 'Level 3', title: 'Create', copy: 'Paid workshops guide visitors through a complete handmade piece with a clear duration, price, take-home outcome, and story.', cta: 'Book a Workshop', href: '#workshops' },
   { kicker: 'Level 4', title: 'Apprentice', copy: 'Longer programs invite committed learners into daily practice with a Culture Keeper for one week to one month.', cta: 'Apply Now', href: '#apprenticeship' }
 ]
 
@@ -320,14 +320,14 @@ const workshops = [
   { status: 'Available to book', title: 'Culinary Classes', meta: 'Duration and price shared on inquiry / suitable for families and groups', points: ['Cook with a Traditional Culinary Keeper using local ingredients', 'Learn the story, preparation, and hospitality around the dish', 'Share what you make at LAKU or plan a private group session'], cta: 'Book This Workshop' },
   { status: 'Available by request', title: 'Batik Wax Lines', meta: 'Requested dates / price shared on inquiry / ages 10+', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Request This Workshop' },
   { status: 'Available by request', title: 'Pottery', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Shape clay with a Pottery Culture Keeper', 'Learn basic form, texture, and hand-building techniques', 'Take home your piece or arrange collection after drying and firing'], cta: 'Request This Workshop' },
-  { status: 'Available by request', title: 'Rattan', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Work with rattan patterns guided by a Culture Keeper', 'Practice simple weaving structures and material handling', 'Take home a handmade woven object'], cta: 'Request This Workshop' }
+  { status: 'Available by request', title: 'Rattan', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Work with rattan patterns guided by a Culture Keeper', 'Practice simple weaving structures and material handling', 'Take home a handmade woven piece'], cta: 'Request This Workshop' }
 ]
 
 const programs = ['1 week', '2 weeks', '3 weeks', '1 month']
 
 const keepers = [
   { tradition: 'Batik', name: 'Batik Culture Keeper', copy: 'Practices wax drawing, motif stories, cloth preparation, and daily demonstration.' },
-  { tradition: 'Bamboo', name: 'Bamboo Culture Keeper', copy: 'Works with local bamboo strips, weaving patterns, and functional handmade objects.' },
+  { tradition: 'Bamboo', name: 'Bamboo Culture Keeper', copy: 'Works with local bamboo strips, weaving patterns, and functional handmade pieces.' },
   { tradition: 'Pottery', name: 'Pottery Culture Keeper', copy: 'Shapes clay, teaches form, and shares the relationship between earth, hand, and utility.' },
   { tradition: 'Culinary', name: 'Traditional Culinary Keeper', copy: 'Introduces Indonesian drinks, spices, sweets, and local hospitality through taste.' }
 ]
