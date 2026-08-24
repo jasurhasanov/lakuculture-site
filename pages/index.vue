@@ -335,20 +335,80 @@
 <script setup lang="ts">
 definePageMeta({ layout: false })
 
+const siteUrl = 'https://lakuculture.id/'
+const seoTitle = 'LAKU Culture Lombok | Workshops, Apprenticeships & Handmade Craft'
+const seoDescription = 'Visit LAKU Culture in Mawun, Lombok for Indonesian cultural workshops, living culture apprenticeships, handmade craft, culinary classes, and private group programs.'
+const seoImage = `${siteUrl}images/laku/optimized/hero-workshop.webp`
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': ['LocalBusiness', 'TouristAttraction'],
+  '@id': `${siteUrl}#organization`,
+  name: 'LAKU Culture',
+  alternateName: 'LAKU',
+  url: siteUrl,
+  logo: `${siteUrl}images/laku/Laku%20logo.png`,
+  image: seoImage,
+  description: seoDescription,
+  slogan: "A Home for Indonesia's Living Culture",
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Mawun',
+    addressRegion: 'Lombok',
+    addressCountry: 'ID'
+  },
+  areaServed: ['Mawun', 'Lombok', 'Indonesia'],
+  telephone: '+6285215622162',
+  sameAs: [
+    'https://facebook.com/LakuCulture.id',
+    'https://instagram.com/lakuculture.id/'
+  ],
+  makesOffer: [
+    { '@type': 'Offer', name: 'Nyensek Weaving Workshop', category: 'Cultural workshop' },
+    { '@type': 'Offer', name: 'Kecapil Hats Weaving Workshop', category: 'Cultural workshop' },
+    { '@type': 'Offer', name: 'Culinary Classes', category: 'Cultural workshop' },
+    { '@type': 'Offer', name: 'Living Culture Apprenticeship', category: 'Educational program' },
+    { '@type': 'Offer', name: 'Private Group Cultural Programs', category: 'Group program' }
+  ]
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}#website`,
+  name: 'LAKU Culture',
+  url: siteUrl,
+  publisher: { '@id': `${siteUrl}#organization` },
+  inLanguage: 'en-ID'
+}
+
 useHead({
-  title: 'LAKU | A Home for Indonesia\'s Living Culture',
+  title: seoTitle,
   meta: [
-    { name: 'description', content: 'LAKU is a living cultural space in Mawun, Lombok, offering daily Culture Keeper experiences, paid workshops, apprenticeships, handmade products, and private programs.' },
+    { name: 'description', content: seoDescription },
+    { name: 'robots', content: 'index, follow, max-image-preview:large' },
     { name: 'theme-color', content: '#253f2f' },
-    { property: 'og:title', content: 'LAKU | A Home for Indonesia\'s Living Culture' },
-    { property: 'og:description', content: 'Meet Culture Keepers, book workshops, apply for living culture apprenticeships, and plan private cultural programs in Lombok.' },
+    { property: 'og:title', content: seoTitle },
+    { property: 'og:description', content: seoDescription },
     { property: 'og:type', content: 'website' },
-    { name: 'twitter:card', content: 'summary_large_image' }
+    { property: 'og:url', content: siteUrl },
+    { property: 'og:image', content: seoImage },
+    { property: 'og:image:alt', content: 'Culture Keeper workshop at LAKU Culture in Mawun, Lombok' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: seoTitle },
+    { name: 'twitter:description', content: seoDescription },
+    { name: 'twitter:image', content: seoImage }
   ],
   link: [
+    { rel: 'canonical', href: siteUrl },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,760&family=Inter:wght@400;500;600;700;800&display=swap' }
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify([organizationSchema, websiteSchema])
+    }
   ]
 })
 

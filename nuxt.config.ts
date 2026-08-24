@@ -11,17 +11,22 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: "LAKU | A Home for Indonesia's Living Culture",
+      title: "LAKU Culture Lombok | Workshops, Apprenticeships & Handmade Craft",
       htmlAttrs: {
         lang: "en"
       },
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "LAKU is a living cultural space in Mawun, Lombok, offering daily Culture Keeper experiences, paid workshops, apprenticeships, handmade products, and private programs." },
-        { name: "theme-color", content: "#253f2f" }
+        { name: "description", content: "Visit LAKU Culture in Mawun, Lombok for Indonesian cultural workshops, living culture apprenticeships, handmade craft, culinary classes, and private group programs." },
+        { name: "robots", content: "index, follow, max-image-preview:large" },
+        { name: "theme-color", content: "#253f2f" },
+        { property: "og:site_name", content: "LAKU Culture" },
+        { property: "og:locale", content: "en_ID" },
+        { name: "twitter:site", content: "@lakuculture_id" }
       ],
       link: [
+        { rel: "canonical", href: "https://lakuculture.id/" },
         { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
       ],
