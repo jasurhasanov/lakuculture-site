@@ -6,11 +6,12 @@
           <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
         </NuxtLink>
         <div class="nav-links">
-          <a href="#visit">Visit LAKU</a>
-          <a href="#workshops">Lombok Workshops</a>
-          <a href="#apprenticeship">Apprenticeship</a>
-          <a href="#groups">Group Programs</a>
-          <a href="#faq">FAQ</a>
+          <NuxtLink to="/visit">Visit LAKU</NuxtLink>
+          <NuxtLink to="/workshops">Lombok Workshops</NuxtLink>
+          <NuxtLink to="/apprenticeship">Apprenticeship</NuxtLink>
+          <NuxtLink to="/products">Products</NuxtLink>
+          <NuxtLink to="/faq">FAQ</NuxtLink>
+          <NuxtLink to="/blog">Blog</NuxtLink>
         </div>
         <a class="nav-cta" href="#inquiry">Plan a Visit</a>
       </div>
@@ -27,9 +28,9 @@
             apprenticeship programs led by local Culture Keepers.
           </p>
           <div class="hero-actions">
-            <a class="button" href="#workshops">Book a Lombok Workshop</a>
-            <a class="button secondary" href="#apprenticeship">Apply for Cultural Apprenticeship</a>
-            <a class="text-link" href="#visit">Plan Your Visit</a>
+            <NuxtLink class="button" to="/workshops">Book a Lombok Workshop</NuxtLink>
+            <NuxtLink class="button secondary" to="/apprenticeship">Apply for Cultural Apprenticeship</NuxtLink>
+            <NuxtLink class="text-link" to="/visit">Plan Your Visit</NuxtLink>
           </div>
         </div>
       </div>
@@ -197,7 +198,7 @@
               <li>Understand the local materials and time behind the craft</li>
               <li>Plan a shop visit, choose a handmade piece, or request a custom order</li>
             </ul>
-            <a class="button secondary dark" href="#inquiry">Ask About Handmade Products</a>
+            <NuxtLink class="button secondary dark" to="/products">Explore Handmade Products</NuxtLink>
           </div>
         </div>
       </section>
@@ -345,6 +346,7 @@
           <a href="https://facebook.com/LakuCulture.id" target="_blank" rel="noopener">Facebook</a>
           <a href="https://instagram.com/lakuculture.id/" target="_blank" rel="noopener">Instagram</a>
           <a href="https://wa.me/6285215622162" target="_blank" rel="noopener">WhatsApp</a>
+          <NuxtLink to="/blog">Blog</NuxtLink>
         </div>
       </div>
     </footer>
