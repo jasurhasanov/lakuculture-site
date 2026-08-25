@@ -1,33 +1,6 @@
 <template>
   <div class="laku-page">
-    <nav class="nav" aria-label="Laku navigation">
-      <div class="shell nav-inner">
-        <NuxtLink class="brand" to="/" aria-label="Laku home">
-          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" />
-        </NuxtLink>
-        <div class="nav-links">
-          <NuxtLink v-for="item in navItems" :key="item.to" :to="item.to">{{ item.label }}</NuxtLink>
-        </div>
-        <a class="nav-cta" href="#inquiry">Plan a Visit</a>
-        <button
-          class="mobile-menu-toggle"
-          type="button"
-          :aria-expanded="isMobileNavOpen"
-          aria-controls="mobile-menu"
-          aria-label="Open navigation menu"
-          @click="toggleMobileNav"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-      <div id="mobile-menu" class="mobile-menu" :class="{ open: isMobileNavOpen }">
-        <div class="shell mobile-menu-inner">
-          <NuxtLink v-for="item in navItems" :key="item.to" :to="item.to" @click="closeMobileNav">{{ item.label }}</NuxtLink>
-        </div>
-      </div>
-    </nav>
+    <LakuNav cta-label="Plan a Visit" cta-to="/#inquiry" />
 
     <header class="hero">
       <div class="shell hero-grid">
@@ -396,24 +369,6 @@ const seoImage = `${siteUrl}${defaultSeoImage.slice(1)}`
 const seoImageSize = imageDimensions[defaultSeoImage]
 const faqs = audienceFaqs
 
-const navItems = [
-  { label: 'Visit LAKU', to: '/visit' },
-  { label: 'Lombok Workshops', to: '/workshops' },
-  { label: 'Apprenticeship', to: '/apprenticeship' },
-  { label: 'Products', to: '/products' },
-  { label: 'FAQ', to: '/faq' },
-  { label: 'Blog', to: '/blog' }
-]
-
-const isMobileNavOpen = ref(false)
-
-const toggleMobileNav = () => {
-  isMobileNavOpen.value = !isMobileNavOpen.value
-}
-
-const closeMobileNav = () => {
-  isMobileNavOpen.value = false
-}
 
 const workshopOfferDetails = {
   price: '75',

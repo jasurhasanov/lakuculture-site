@@ -1,20 +1,6 @@
 <template>
   <div class="blog-page">
-    <nav class="nav" aria-label="Laku navigation">
-      <div class="shell nav-inner">
-        <NuxtLink class="brand" to="/" aria-label="Laku home">
-          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" />
-        </NuxtLink>
-        <div class="nav-links">
-          <NuxtLink to="/visit">Visit</NuxtLink>
-          <NuxtLink to="/workshops">Workshops</NuxtLink>
-          <NuxtLink to="/apprenticeship">Apprenticeship</NuxtLink>
-          <NuxtLink to="/products">Products</NuxtLink>
-          <NuxtLink to="/faq">FAQ</NuxtLink>
-        </div>
-        <NuxtLink class="nav-cta" to="/#inquiry">Plan with LAKU</NuxtLink>
-      </div>
-    </nav>
+    <LakuNav />
 
     <main>
       <header class="hero">
