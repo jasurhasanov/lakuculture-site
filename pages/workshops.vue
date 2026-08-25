@@ -299,10 +299,14 @@ const faqs = [
   { question: 'Do I need to book in advance?', answer: 'Advance inquiry is recommended so LAKU can prepare the right Culture Keeper, materials, timing, and group setup.' },
   { question: 'How much does a workshop cost?', answer: 'The minimum booking is EUR 75 and covers up to 3 people. Additional guests are EUR 25 each.' },
   { question: 'What is included in a workshop booking?', answer: 'Each booking includes Culture Keeper guidance, workshop materials, a traditional choice of drink, and a plate of traditional snacks.' },
+  { question: 'How long does a workshop take?', answer: 'Workshops are paced without rush. Most take about half a day, around 3-4 hours, while full-day formats can be arranged depending on participant availability.' },
+  { question: 'What should we bring?', answer: 'Wear comfortable clothes and arrive ready to use your hands. LAKU provides water, a traditional drink, and traditional snacks.' },
+  { question: 'What happens if it rains?', answer: 'LAKU has a fully covered indoor space with AC and fans, plus a covered terrace for outdoor seating, so workshops can continue comfortably in rainy weather.' },
   { question: 'Are LAKU workshops suitable for beginners?', answer: 'Yes. Workshops are guided step by step and can be adjusted for first-time makers, families, and private groups.' },
   { question: 'Can children join the workshops?', answer: 'Yes, depending on the workshop and age. Share each child age when inquiring so LAKU can recommend a comfortable format.' },
   { question: 'Can we take home what we make?', answer: 'Many workshops include a handmade piece or clear take-home outcome. Some materials may need drying, finishing, or later collection.' },
   { question: 'Where is LAKU Culture?', answer: 'LAKU Culture is in Mawun, South Lombok, positioned between Kuta Lombok and Selong Belanak.' },
+  { question: 'How do we contact LAKU?', answer: 'Use the inquiry form on the website or message LAKU on WhatsApp at https://wa.me/6285215622162 with your dates, group size, ages, and workshop interests.' },
   { question: 'Can LAKU host private group workshops?', answer: 'Yes. LAKU can plan private cultural workshops for families, schools, companies, retreats, hotels, and travel partners.' }
 ]
 

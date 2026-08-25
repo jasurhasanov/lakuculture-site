@@ -120,14 +120,14 @@ export const audienceFaqs = [
   { question: 'Do we need to book in advance?', answer: 'Advance inquiry is recommended for workshops, families, private sessions, and group programs so LAKU can prepare the right Culture Keeper, materials, and schedule.' },
   { question: 'Can we visit without booking a workshop?', answer: 'Visitors can inquire about simple visits, but planned workshops and private programs should be arranged in advance for the best experience.' },
   { question: 'What workshops are available at LAKU?', answer: 'LAKU offers or can arrange cultural workshops including Nyensek weaving, kecapil hat weaving, culinary classes, batik, pottery, bamboo, and rattan depending on date and availability.' },
-  { question: 'How long does a workshop take?', answer: 'Duration depends on the activity, age group, and private or group format. Share your schedule when inquiring and LAKU will recommend a realistic session length.' },
+  { question: 'How long does a workshop take?', answer: 'Workshops are paced without rush. Most take about half a day, around 3-4 hours, while full-day formats can be arranged depending on participant availability.' },
   { question: 'Can families with mixed ages join together?', answer: 'Yes. Share all child ages and adult count so LAKU can suggest a family format that keeps younger children comfortable and older children engaged.' },
   { question: 'Can LAKU host private groups?', answer: 'Yes. LAKU can plan private cultural programs for families, schools, companies, hotels, retreats, travel partners, and visiting delegations.' },
   { question: 'Can guests take home what they make?', answer: 'Many workshop formats include a handmade piece or clear take-home outcome. Some materials may need drying, finishing, or later collection, so confirm during booking.' },
-  { question: 'What should we bring?', answer: 'Wear comfortable clothes, bring water, and arrive ready to use your hands. For children, bring anything they normally need for comfort, sun, or snack routines.' },
-  { question: 'What happens if it rains?', answer: 'Ask LAKU when booking. Many cultural activities can work as shaded or semi-indoor experiences, but format and timing may depend on the weather and materials.' },
+  { question: 'What should we bring?', answer: 'Wear comfortable clothes and arrive ready to use your hands. LAKU provides water, a traditional drink, and traditional snacks. For children, bring anything they normally need for comfort or sun routines.' },
+  { question: 'What happens if it rains?', answer: 'LAKU has a fully covered indoor space with AC and fans, plus a covered terrace for outdoor seating, so workshops can continue comfortably in rainy weather.' },
   { question: 'Can LAKU support school or educational visits?', answer: 'Yes. Share the age range, learning goals, group size, and preferred dates so LAKU can recommend a Culture Keeper-led program with appropriate context.' },
-  { question: 'How do we contact LAKU?', answer: 'Use the inquiry form on the website or WhatsApp LAKU at +62 852-1562-2162 with your dates, group size, ages, and activity interests.' }
+  { question: 'How do we contact LAKU?', answer: 'Use the inquiry form on the website or message LAKU on WhatsApp at https://wa.me/6285215622162 with your dates, group size, ages, and activity interests.' }
 ]
 
 export const landingPages: Record<string, LandingPageContent> = {
