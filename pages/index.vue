@@ -113,12 +113,13 @@
           <div class="section-head values-head">
             <div>
               <p class="eyebrow">Create with Culture Keepers</p>
-              <h2>Indonesian cultural workshops you can book or request.</h2>
+              <h2>Indonesian cultural workshops from EUR 75 for up to 3 people.</h2>
             </div>
             <p>
-              Create something by hand with a Culture Keeper in Mawun, Lombok. Book
-              weaving and culinary experiences, or ask about batik, pottery, bamboo,
-              and rattan sessions for your dates.
+              Create something by hand with a Culture Keeper in Mawun, Lombok. Each
+              workshop includes materials, a traditional drink, and a plate of traditional
+              snacks. The minimum booking is EUR 75 for up to 3 people, then EUR 25 for
+              each additional guest.
             </p>
           </div>
 
@@ -384,14 +385,20 @@ const seoImageSize = imageDimensions[defaultSeoImage]
 const faqs = audienceFaqs
 
 
+const workshopOfferDetails = {
+  price: '75',
+  priceCurrency: 'EUR',
+  description: 'Minimum booking covers up to 3 people. Additional guests are EUR 25 each. Includes materials, a traditional drink, and a plate of traditional snacks.'
+}
+
 const offerCatalogSchema = {
   '@type': 'OfferCatalog',
   '@id': `${siteUrl}#cultural-programs`,
   name: 'LAKU Culture Programs',
   itemListElement: [
-    { '@type': 'Offer', name: 'Nyensek Weaving Workshop', category: 'Indonesian cultural workshop', areaServed: 'Lombok, Indonesia' },
-    { '@type': 'Offer', name: 'Kecapil Hats Weaving Workshop', category: 'Indonesian cultural workshop', areaServed: 'Lombok, Indonesia' },
-    { '@type': 'Offer', name: 'Culinary Classes', category: 'Indonesian culinary class', areaServed: 'Lombok, Indonesia' },
+    { '@type': 'Offer', name: 'Nyensek Weaving Workshop', category: 'Indonesian cultural workshop', areaServed: 'Lombok, Indonesia', ...workshopOfferDetails },
+    { '@type': 'Offer', name: 'Kecapil Hats Weaving Workshop', category: 'Indonesian cultural workshop', areaServed: 'Lombok, Indonesia', ...workshopOfferDetails },
+    { '@type': 'Offer', name: 'Culinary Classes', category: 'Indonesian culinary class', areaServed: 'Lombok, Indonesia', ...workshopOfferDetails },
     { '@type': 'Offer', name: 'Living Culture Apprenticeship', category: 'Cultural education program', areaServed: 'Indonesia' },
     { '@type': 'Offer', name: 'Private Group Cultural Programs', category: 'Private cultural program', areaServed: 'Lombok, Indonesia' },
     { '@type': 'Offer', name: 'Handmade Indonesian Products', category: 'Handmade craft', areaServed: 'Indonesia' }
@@ -540,12 +547,12 @@ const levels = [
 ]
 
 const workshops = [
-  { status: 'Available to book', title: 'Nyensek Weaving', meta: 'Duration and price shared on inquiry / beginner friendly', points: ['Weave with a Culture Keeper using traditional Lombok techniques', 'Create a small textile piece through guided hands-on practice', 'Take home the piece you make and the story behind the tradition'], cta: 'Book This Workshop' },
-  { status: 'Available to book', title: 'Kecapil Hats Weaving', meta: 'Duration and price shared on inquiry / beginner friendly', points: ['Learn how kecapil hat forms are built from woven natural materials', 'Shape a handmade piece with step-by-step guidance', 'Take home your woven work or arrange collection if finishing time is needed'], cta: 'Book This Workshop' },
-  { status: 'Available to book', title: 'Culinary Classes', meta: 'Duration and price shared on inquiry / suitable for families and groups', points: ['Cook with a Traditional Culinary Keeper using local ingredients', 'Learn the story, preparation, and hospitality around the dish', 'Share what you make at LAKU or plan a private group session'], cta: 'Book This Workshop' },
-  { status: 'Available by request', title: 'Batik Wax Lines', meta: 'Requested dates / price shared on inquiry / ages 10+', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Take home a small batik work'], cta: 'Request This Workshop' },
-  { status: 'Available by request', title: 'Pottery', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Shape clay with a Pottery Culture Keeper', 'Learn basic form, texture, and hand-building techniques', 'Take home your piece or arrange collection after drying and firing'], cta: 'Request This Workshop' },
-  { status: 'Available by request', title: 'Rattan', meta: 'Requested dates / price shared on inquiry / beginner friendly', points: ['Work with rattan patterns guided by a Culture Keeper', 'Practice simple weaving structures and material handling', 'Take home a handmade woven piece'], cta: 'Request This Workshop' }
+  { status: 'Available to book', title: 'Nyensek Weaving', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Weave with a Culture Keeper using traditional Lombok techniques', 'Create a small textile piece through guided hands-on practice', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Take home the piece you make and the story behind the tradition'], cta: 'Book This Workshop' },
+  { status: 'Available to book', title: 'Kecapil Hats Weaving', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Learn how kecapil hat forms are built from woven natural materials', 'Shape a handmade piece with step-by-step guidance', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Take home your woven work or arrange collection if finishing time is needed'], cta: 'Book This Workshop' },
+  { status: 'Available to book', title: 'Culinary Classes', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Cook with a Traditional Culinary Keeper using local ingredients', 'Learn the story, preparation, and hospitality around the dish', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Share what you make at LAKU or plan a private group session'], cta: 'Book This Workshop' },
+  { status: 'Available by request', title: 'Batik Wax Lines', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Draw wax lines with a Batik Culture Keeper', 'Learn motif meaning and cloth preparation', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Take home a small batik work'], cta: 'Request This Workshop' },
+  { status: 'Available by request', title: 'Pottery', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Shape clay with a Pottery Culture Keeper', 'Learn basic form, texture, and hand-building techniques', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Take home your piece or arrange collection after drying and firing'], cta: 'Request This Workshop' },
+  { status: 'Available by request', title: 'Rattan', meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest', points: ['Work with rattan patterns guided by a Culture Keeper', 'Practice simple weaving structures and material handling', 'Enjoy a traditional drink and plate of traditional snacks during the session', 'Take home a handmade woven piece'], cta: 'Request This Workshop' }
 ]
 
 const programs = [
