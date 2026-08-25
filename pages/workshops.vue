@@ -54,10 +54,13 @@
               of the tradition.
             </p>
             <div class="quick-facts" aria-label="Workshop highlights">
+              <span>EUR 75 minimum booking</span>
+              <span>Covers up to 3 people</span>
+              <span>EUR 25 per additional guest</span>
+              <span>Traditional drink and snacks included</span>
               <span>Beginner friendly</span>
               <span>Family and group options</span>
               <span>Private sessions by request</span>
-              <span>Mawun, South Lombok</span>
             </div>
           </div>
         </div>
@@ -70,8 +73,9 @@
             <h2>Choose a hands-on cultural experience.</h2>
             <p>
               Some workshops are available to book regularly, while others depend on Culture Keeper,
-              material, and date availability. Send your dates and group details so LAKU can match
-              the right format.
+              material, and date availability. Each workshop has a minimum booking of EUR 75 for
+              up to 3 people, with additional guests at EUR 25 each. A traditional drink and a
+              plate of traditional snacks are included.
             </p>
           </div>
           <div class="workshop-grid">
@@ -206,10 +210,11 @@ const workshops = [
   {
     status: 'Available to book',
     title: 'Nyensek Weaving',
-    meta: 'Traditional Lombok textile practice / beginner friendly',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Weave with a Culture Keeper using traditional Lombok techniques',
       'Create a small textile piece through guided hands-on practice',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Take home the piece you make and the story behind the tradition'
     ],
     cta: 'Book Nyensek Weaving'
@@ -217,10 +222,11 @@ const workshops = [
   {
     status: 'Available to book',
     title: 'Kecapil Hat Weaving',
-    meta: 'Natural materials / beginner friendly',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Learn how kecapil hat forms are built from woven natural materials',
       'Shape a handmade piece with step-by-step guidance',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Take home your woven work or arrange collection if finishing time is needed'
     ],
     cta: 'Book Hat Weaving'
@@ -228,10 +234,11 @@ const workshops = [
   {
     status: 'Available to book',
     title: 'Culinary Classes',
-    meta: 'Local ingredients / suitable for families and groups',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Cook with a Traditional Culinary Keeper using local ingredients',
       'Learn the story, preparation, and hospitality around the dish',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Share what you make at LAKU or plan a private group session'
     ],
     cta: 'Book a Culinary Class'
@@ -239,10 +246,11 @@ const workshops = [
   {
     status: 'Available by request',
     title: 'Batik Wax Lines',
-    meta: 'Requested dates / ages 10+',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Draw wax lines with a Batik Culture Keeper',
       'Learn motif meaning and cloth preparation',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Take home a small batik work'
     ],
     cta: 'Request Batik'
@@ -250,10 +258,11 @@ const workshops = [
   {
     status: 'Available by request',
     title: 'Pottery',
-    meta: 'Requested dates / beginner friendly',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Shape clay with a Pottery Culture Keeper',
       'Learn basic form, texture, and hand-building techniques',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Take home your piece or arrange collection after drying and firing'
     ],
     cta: 'Request Pottery'
@@ -261,10 +270,11 @@ const workshops = [
   {
     status: 'Available by request',
     title: 'Rattan and Bamboo',
-    meta: 'Requested dates / natural-fiber practice',
+    meta: 'From EUR 75 for up to 3 people / EUR 25 per additional guest',
     points: [
       'Work with rattan, bamboo, or woven patterns guided by a Culture Keeper',
       'Practice simple structures and material handling',
+      'Enjoy a traditional drink and plate of traditional snacks during the session',
       'Take home a handmade woven piece when the format allows'
     ],
     cta: 'Request Rattan or Bamboo'
@@ -281,12 +291,14 @@ const fits = [
 
 const steps = [
   { kicker: 'Step 1', title: 'Share your plan', copy: 'Send your preferred date, group size, ages, language needs, and which workshop interests you.' },
-  { kicker: 'Step 2', title: 'Match the session', copy: 'LAKU confirms Culture Keeper availability, material needs, session length, and the best format for your group.' },
-  { kicker: 'Step 3', title: 'Arrive and make', copy: 'Come to Mawun ready to use your hands, ask questions, learn the story, and create something with guidance.' }
+  { kicker: 'Step 2', title: 'Confirm the booking', copy: 'LAKU confirms Culture Keeper availability, materials, and the EUR 75 minimum booking for up to 3 people, plus EUR 25 per additional guest.' },
+  { kicker: 'Step 3', title: 'Arrive and make', copy: 'Come to Mawun ready to create by hand, ask questions, and enjoy the included traditional drink and snack plate.' }
 ]
 
 const faqs = [
   { question: 'Do I need to book in advance?', answer: 'Advance inquiry is recommended so LAKU can prepare the right Culture Keeper, materials, timing, and group setup.' },
+  { question: 'How much does a workshop cost?', answer: 'The minimum booking is EUR 75 and covers up to 3 people. Additional guests are EUR 25 each.' },
+  { question: 'What is included in a workshop booking?', answer: 'Each booking includes Culture Keeper guidance, workshop materials, a traditional choice of drink, and a plate of traditional snacks.' },
   { question: 'Are LAKU workshops suitable for beginners?', answer: 'Yes. Workshops are guided step by step and can be adjusted for first-time makers, families, and private groups.' },
   { question: 'Can children join the workshops?', answer: 'Yes, depending on the workshop and age. Share each child age when inquiring so LAKU can recommend a comfortable format.' },
   { question: 'Can we take home what we make?', answer: 'Many workshops include a handmade piece or clear take-home outcome. Some materials may need drying, finishing, or later collection.' },
@@ -308,6 +320,9 @@ const offerSchema = workshops.map((workshop) => ({
   name: workshop.title,
   category: 'Indonesian cultural workshop',
   areaServed: 'Lombok, Indonesia',
+  price: '75',
+  priceCurrency: 'EUR',
+  description: 'Minimum booking covers up to 3 people. Additional guests are EUR 25 each. Includes a traditional drink and traditional snacks.',
   availability: 'https://schema.org/InStock',
   url: canonicalUrl
 }))
