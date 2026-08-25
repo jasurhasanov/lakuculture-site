@@ -3,7 +3,7 @@
     <nav class="nav" aria-label="Laku navigation">
       <div class="shell nav-inner">
         <NuxtLink class="brand" to="/" aria-label="Laku home">
-          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
+          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" />
         </NuxtLink>
         <div class="nav-links">
           <NuxtLink to="/visit">Visit LAKU</NuxtLink>
@@ -64,6 +64,8 @@
             <img
               src="/images/laku/optimized/craft-detail.webp"
               alt="Hands-on Indonesian craft workshop detail at LAKU Culture in Mawun, Lombok"
+              width="1200"
+              height="1600"
               loading="lazy"
             />
           </figure>
@@ -167,7 +169,7 @@
           </div>
           <div class="keeper-grid">
             <article v-for="keeper in keepers" :key="keeper.tradition" class="keeper-card" :class="{ 'keeper-card-combined': keeper.items }">
-              <img v-if="keeper.image" class="keeper-photo" :src="keeper.image" :alt="keeper.alt" loading="lazy" />
+              <img v-if="keeper.image" class="keeper-photo" :src="keeper.image" :alt="keeper.alt" :width="imageDimensions[keeper.image]?.width" :height="imageDimensions[keeper.image]?.height" loading="lazy" />
               <span>{{ keeper.tradition }}</span>
               <h3>{{ keeper.name }}</h3>
               <p>{{ keeper.copy }}</p>
@@ -338,7 +340,7 @@
     <footer>
       <div class="shell footer-inner">
         <div class="footer-brand">
-          <img class="footer-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
+          <img class="footer-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" loading="lazy" />
           <span>A Home for Indonesia's Living Culture</span>
           <address>Mawun, Lombok, Indonesia</address>
         </div>
@@ -366,12 +368,15 @@
 </template>
 
 <script setup lang="ts">
+import { defaultSeoImage, imageDimensions } from '~/data/lakuSeo'
+
 definePageMeta({ layout: false })
 
 const siteUrl = 'https://lakuculture.id/'
 const seoTitle = 'LAKU Culture Lombok | Workshops, Apprenticeships & Handmade Craft'
 const seoDescription = 'Visit LAKU Culture in Mawun, Lombok for Indonesian cultural workshops, living culture apprenticeships, handmade craft, culinary classes, and private group programs.'
-const seoImage = `${siteUrl}images/laku/optimized/hero-workshop.webp`
+const seoImage = `${siteUrl}${defaultSeoImage.slice(1)}`
+const seoImageSize = imageDimensions[defaultSeoImage]
 const faqs = [
   {
     question: 'Where is LAKU Culture located?',
@@ -466,6 +471,8 @@ const webPageSchema = {
   primaryImageOfPage: {
     '@type': 'ImageObject',
     url: seoImage,
+    width: seoImageSize.width,
+    height: seoImageSize.height,
     caption: 'Culture Keeper workshop at LAKU Culture in Mawun, Lombok'
   },
   breadcrumb: { '@id': `${siteUrl}#breadcrumb` },
@@ -515,6 +522,8 @@ useHead({
     { property: 'og:url', content: siteUrl },
     { property: 'og:image', content: seoImage },
     { property: 'og:image:alt', content: 'Culture Keeper workshop at LAKU Culture in Mawun, Lombok' },
+    { property: 'og:image:width', content: String(seoImageSize.width) },
+    { property: 'og:image:height', content: String(seoImageSize.height) },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: seoTitle },
     { name: 'twitter:description', content: seoDescription },
@@ -522,6 +531,7 @@ useHead({
   ],
   link: [
     { rel: 'canonical', href: siteUrl },
+    { rel: 'preload', as: 'image', href: defaultSeoImage, fetchpriority: 'high' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,760&family=Inter:wght@400;500;600;700;800&display=swap' }

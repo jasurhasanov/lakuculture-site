@@ -1,5 +1,18 @@
 export const siteUrl = 'https://lakuculture.id'
 
+export const defaultSeoImage = '/images/laku/optimized/hero-workshop.webp'
+
+export const imageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/laku/Laku logo.png': { width: 2172, height: 724 },
+  '/images/laku/optimized/craft-detail.webp': { width: 1200, height: 1600 },
+  '/images/laku/optimized/hero-workshop.webp': { width: 1280, height: 960 },
+  '/images/laku/optimized/table-offering.webp': { width: 900, height: 1200 },
+  '/images/laku/optimized/weaving-values.webp': { width: 1600, height: 2133 },
+  '/images/laku/20251008_091302.jpg': { width: 4000, height: 3000 },
+  '/images/laku/20260810_111236.jpg': { width: 4000, height: 3000 },
+  '/images/laku/20260816_090306.jpg': { width: 4000, height: 3000 }
+}
+
 export type LandingPageContent = {
   slug: string
   title: string

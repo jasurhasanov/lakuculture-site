@@ -3,13 +3,14 @@
 </template>
 
 <script setup lang="ts">
-import { landingPages, siteUrl } from '~/data/lakuSeo'
+import { imageDimensions, landingPages, siteUrl } from '~/data/lakuSeo'
 
 definePageMeta({ layout: false })
 
 const page = landingPages.visit
 const canonicalUrl = `${siteUrl}/visit`
 const pageImage = `${siteUrl}${page.image}`
+const imageSize = imageDimensions[page.image]
 
 const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
@@ -28,7 +29,7 @@ const webPageSchema = {
   description: page.description,
   isPartOf: { '@id': `${siteUrl}/#website` },
   about: { '@id': `${siteUrl}/#organization` },
-  primaryImageOfPage: { '@type': 'ImageObject', url: pageImage, caption: page.imageAlt },
+  primaryImageOfPage: { '@type': 'ImageObject', url: pageImage, width: imageSize.width, height: imageSize.height, caption: page.imageAlt },
   breadcrumb: { '@id': `${canonicalUrl}#breadcrumb` },
   inLanguage: 'en-ID'
 }
@@ -54,6 +55,8 @@ useHead({
     { property: 'og:url', content: canonicalUrl },
     { property: 'og:image', content: pageImage },
     { property: 'og:image:alt', content: page.imageAlt },
+    { property: 'og:image:width', content: String(imageSize.width) },
+    { property: 'og:image:height', content: String(imageSize.height) },
     { name: 'twitter:card', content: 'summary_large_image' },
     { name: 'twitter:title', content: page.title },
     { name: 'twitter:description', content: page.description },
@@ -61,6 +64,7 @@ useHead({
   ],
   link: [
     { rel: 'canonical', href: canonicalUrl },
+    { rel: 'preload', as: 'image', href: page.image, fetchpriority: 'high' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,760&family=Inter:wght@400;500;600;700;800&display=swap' }

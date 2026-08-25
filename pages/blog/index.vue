@@ -3,7 +3,7 @@
     <nav class="nav" aria-label="Laku navigation">
       <div class="shell nav-inner">
         <NuxtLink class="brand" to="/" aria-label="Laku home">
-          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
+          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" />
         </NuxtLink>
         <div class="nav-links">
           <NuxtLink to="/visit">Visit</NuxtLink>
@@ -40,13 +40,15 @@
 </template>
 
 <script setup lang="ts">
-import { blogPosts, siteUrl } from '~/data/lakuSeo'
+import { blogPosts, defaultSeoImage, imageDimensions, siteUrl } from '~/data/lakuSeo'
 
 definePageMeta({ layout: false })
 
 const title = 'LAKU Culture Blog | Lombok Culture Guides'
 const description = 'Guides to cultural workshops, apprenticeships, handmade products, and visiting LAKU Culture in Mawun, Lombok.'
 const canonicalUrl = `${siteUrl}/blog`
+const seoImage = `${siteUrl}${defaultSeoImage}`
+const seoImageSize = imageDimensions[defaultSeoImage]
 
 useHead({
   title,
@@ -57,10 +59,14 @@ useHead({
     { property: 'og:description', content: description },
     { property: 'og:type', content: 'website' },
     { property: 'og:url', content: canonicalUrl },
-    { property: 'og:image', content: `${siteUrl}/images/laku/optimized/hero-workshop.webp` }
+    { property: 'og:image', content: seoImage },
+    { property: 'og:image:alt', content: 'Culture Keeper workshop at LAKU Culture in Mawun, Lombok' },
+    { property: 'og:image:width', content: String(seoImageSize.width) },
+    { property: 'og:image:height', content: String(seoImageSize.height) }
   ],
   link: [
     { rel: 'canonical', href: canonicalUrl },
+    { rel: 'preload', as: 'image', href: defaultSeoImage, fetchpriority: 'high' },
     { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
     { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
     { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650;9..144,760&family=Inter:wght@400;500;600;700;800&display=swap' }

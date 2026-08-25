@@ -3,7 +3,7 @@
     <nav class="nav" aria-label="Laku navigation">
       <div class="shell nav-inner">
         <NuxtLink class="brand" to="/" aria-label="Laku home">
-          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
+          <img class="brand-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" />
         </NuxtLink>
         <div class="nav-links">
           <NuxtLink to="/visit">Visit</NuxtLink>
@@ -33,7 +33,13 @@
       <section class="intro-section">
         <div class="shell intro-grid">
           <figure class="image-frame">
-            <img :src="page.image" :alt="page.imageAlt" loading="lazy" />
+            <img
+              :src="page.image"
+              :alt="page.imageAlt"
+              :width="imageSize.width"
+              :height="imageSize.height"
+              loading="lazy"
+            />
           </figure>
           <div class="intro-copy">
             <p class="eyebrow dark-text">LAKU Culture Lombok</p>
@@ -85,7 +91,7 @@
     <footer>
       <div class="shell footer-inner">
         <div class="footer-brand">
-          <img class="footer-logo" src="/images/laku/Laku logo.png" alt="LAKU" />
+          <img class="footer-logo" src="/images/laku/Laku logo.png" alt="LAKU" width="2172" height="724" loading="lazy" />
           <span>A Home for Indonesia's Living Culture</span>
           <address>Mawun, Lombok, Indonesia</address>
         </div>
@@ -100,11 +106,14 @@
 </template>
 
 <script setup lang="ts">
+import { imageDimensions } from '~/data/lakuSeo'
 import type { LandingPageContent } from '~/data/lakuSeo'
 
 const props = defineProps<{
   page: LandingPageContent
 }>()
+
+const imageSize = computed(() => imageDimensions[props.page.image] ?? { width: 1200, height: 900 })
 
 const secondaryHref = computed(() => {
   if (props.page.slug === 'workshops') return '/visit'
