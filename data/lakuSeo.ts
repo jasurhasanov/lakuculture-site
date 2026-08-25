@@ -196,10 +196,10 @@ export const landingPages: Record<string, LandingPageContent> = {
   apprenticeship: {
     slug: 'apprenticeship',
     title: 'Living Culture Apprenticeship in Indonesia | LAKU Culture',
-    description: 'Apply for a one week to one month living culture apprenticeship at LAKU Culture in Lombok and learn daily practice with Indonesian Culture Keepers.',
+    description: 'Apply for a 10 day to 3 month living culture apprenticeship at LAKU Culture in Lombok with daily Culture Keeper practice, package options, and completion letter.',
     eyebrow: 'Deeper cultural learning',
     h1: 'Living Culture Apprenticeship in Indonesia',
-    lead: 'The LAKU apprenticeship is for committed learners who want daily practice with a Culture Keeper over one week, two weeks, three weeks, or one month.',
+    lead: 'The LAKU apprenticeship is for committed learners who want daily practice with a Culture Keeper for a minimum of 10 days and up to 3 months.',
     image: '/images/laku/optimized/weaving-values.webp',
     imageAlt: 'Traditional weaving practice during a LAKU Culture apprenticeship in Lombok',
     primaryCta: 'Apply for Apprenticeship',
@@ -207,9 +207,9 @@ export const landingPages: Record<string, LandingPageContent> = {
     sections: [
       {
         eyebrow: 'Program lengths',
-        title: 'One week to one month of living culture practice',
+        title: 'Ten days to three months of living culture practice',
         copy: 'Participants work directly with a Culture Keeper, building skill through repetition, conversation, observation, and daily cultural rhythm.',
-        points: ['1 week introduction', '2 and 3 week deeper study', '1 month immersive apprenticeship']
+        points: ['Minimum 10 day introduction', '2 to 4 week deeper study', 'Up to 3 month immersive apprenticeship']
       },
       {
         eyebrow: 'Completion letter',
@@ -219,7 +219,7 @@ export const landingPages: Record<string, LandingPageContent> = {
       }
     ],
     faqs: [
-      { question: 'How long is the apprenticeship?', answer: 'LAKU offers one week, two week, three week, and one month apprenticeship options.' },
+      { question: 'How long is the apprenticeship?', answer: 'The apprenticeship requires a minimum of 10 days and can continue up to 3 months.' },
       { question: 'Who is the apprenticeship for?', answer: 'It is for committed learners who want deeper cultural practice with Indonesian Culture Keepers in Lombok.' },
       { question: 'Does LAKU provide a completion document?', answer: 'Participants can receive a personal completion letter describing the traditional skills and cultural context learned.' }
     ]
