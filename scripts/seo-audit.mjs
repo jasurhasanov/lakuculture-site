@@ -13,9 +13,21 @@ const routes = [
   '/products',
   '/faq',
   '/blog',
-  '/blog/lombok-cultural-workshops',
-  '/blog/living-culture-apprenticeship',
-  '/blog/visit-mawun-lombok-culture'
+  '/blog/things-to-do-lombok-couples-culture',
+  '/blog/romantic-cultural-experience-lombok',
+  '/blog/kuta-lombok-date-activity-laku',
+  '/blog/lombok-with-toddlers-cultural-activity',
+  '/blog/family-activities-kuta-lombok-kids',
+  '/blog/children-workshop-lombok-ages-3-7',
+  '/blog/educational-activities-lombok-kids-teens',
+  '/blog/teen-activities-lombok-culture-workshop',
+  '/blog/lombok-workshops-for-families',
+  '/blog/solo-travel-lombok-cultural-experience',
+  '/blog/authentic-lombok-cultural-experience',
+  '/blog/workshops-in-kuta-lombok-alternative',
+  '/blog/things-to-do-near-kuta-lombok-expats',
+  '/blog/activities-near-selong-belanak-laku',
+  '/blog/weekend-activities-lombok-families-expats'
 ]
 
 const sourceFiles = [

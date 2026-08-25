@@ -368,7 +368,7 @@
 </template>
 
 <script setup lang="ts">
-import { defaultSeoImage, imageDimensions } from '~/data/lakuSeo'
+import { audienceFaqs, defaultSeoImage, imageDimensions } from '~/data/lakuSeo'
 
 definePageMeta({ layout: false })
 
@@ -377,24 +377,8 @@ const seoTitle = 'LAKU Culture Lombok | Workshops, Apprenticeships & Handmade Cr
 const seoDescription = 'Visit LAKU Culture in Mawun, Lombok for Indonesian cultural workshops, living culture apprenticeships, handmade craft, culinary classes, and private group programs.'
 const seoImage = `${siteUrl}${defaultSeoImage.slice(1)}`
 const seoImageSize = imageDimensions[defaultSeoImage]
-const faqs = [
-  {
-    question: 'Where is LAKU Culture located?',
-    answer: 'LAKU Culture is in Mawun, Lombok, Indonesia. Visitors can use the inquiry form or WhatsApp to plan a workshop, visit, or private cultural program.'
-  },
-  {
-    question: 'What can visitors do at LAKU Culture?',
-    answer: 'Guests can observe Culture Keepers, join hands-on Indonesian cultural workshops, book weaving or culinary classes, request batik, pottery, bamboo, and rattan sessions, or apply for longer apprenticeship programs.'
-  },
-  {
-    question: 'Are workshops available for groups?',
-    answer: 'Yes. LAKU Culture can plan private programs for schools, companies, hotels, retreats, families, cultural delegations, and travel partners in Lombok.'
-  },
-  {
-    question: 'Do visitors need to book before coming?',
-    answer: 'Guests can ask about visits, but booked workshops and private programs should be requested in advance so the right Culture Keeper, materials, and schedule can be prepared.'
-  }
-]
+const faqs = audienceFaqs
+
 
 const offerCatalogSchema = {
   '@type': 'OfferCatalog',
