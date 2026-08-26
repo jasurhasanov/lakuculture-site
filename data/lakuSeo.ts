@@ -165,32 +165,55 @@ export const landingPages: Record<string, LandingPageContent> = {
   visit: {
     slug: 'visit',
     title: 'Visit LAKU Culture in Mawun, Lombok',
-    description: 'Plan a visit to LAKU Culture in Mawun, Lombok to meet Culture Keepers, watch Indonesian craft practice, join workshops, and experience living culture.',
+    description: 'Plan a useful visit to LAKU Culture in Mawun, Lombok with practical details on activities, timing, location, comfort, facilities, and booking by WhatsApp.',
     eyebrow: 'Plan your visit',
     h1: 'Visit LAKU Culture in Mawun, Lombok',
-    lead: 'LAKU Culture is a place to meet Culture Keepers, observe daily making, join short cultural experiences, and book deeper workshops in Mawun, Lombok.',
+    lead: 'Use this page to plan a real visit: what you can do, who it works for, how long to stay, what to bring, and how to confirm your date before coming to Mawun.',
     image: '/images/laku/optimized/hero-workshop.webp',
     imageAlt: 'Visitors learning with Culture Keepers at LAKU Culture Lombok',
     primaryCta: 'Plan a Visit',
     secondaryCta: 'See Workshops',
     sections: [
       {
-        eyebrow: 'Open experience',
-        title: 'Observe, ask, and enter the rhythm of LAKU',
-        copy: 'Guests can visit to watch Culture Keepers practice, ask questions, enjoy the atmosphere, and understand the traditions behind the work.',
-        points: ['Meet Culture Keepers during active making', 'Learn the stories behind craft, food, and local practice', 'Ask about workshops and programs while onsite']
+        eyebrow: 'What to do',
+        title: 'Meet Culture Keepers, observe, or make by hand',
+        copy: 'A LAKU visit can be a simple cultural stop, a short introduction, or a booked workshop. The best format depends on your date, group size, ages, and how much time you want to spend.',
+        points: ['Meet Culture Keepers when active making is available', 'Ask about weaving, bamboo, rattan, batik, pottery, or culinary practice', 'Book a hands-on workshop when you want a guided activity']
       },
       {
-        eyebrow: 'For travelers',
-        title: 'Add a meaningful cultural stop to a Lombok trip',
-        copy: 'LAKU is designed for travelers who want more than a photo stop. Visitors can move from observation into hands-on making or longer learning.',
-        points: ['Good for families, couples, groups, and solo travelers', 'Located in Mawun, Lombok, Indonesia', 'Workshop booking recommended for planned activities']
+        eyebrow: 'Who it fits',
+        title: 'A practical stop for South Lombok visitors',
+        copy: 'LAKU works well for travelers and residents who want a calm, meaningful plan between Kuta Lombok, Mawun, and Selong Belanak instead of another beach or cafe stop.',
+        points: ['Good for families, couples, solo travelers, small groups, schools, retreats, and hotel guests', 'Useful for both short visits and deeper half-day or full-day workshops', 'Private group programs can be discussed before arrival']
+      },
+      {
+        eyebrow: 'Timing',
+        title: 'Choose a quick visit, half-day workshop, or full-day plan',
+        copy: 'A short visit is best for meeting LAKU and understanding what is possible. Workshops are intentionally unhurried, with enough time to learn from the Culture Keeper and enjoy the setting.',
+        points: ['Short cultural visits can be arranged by inquiry', 'Most workshops take about half a day, around 3-4 hours', 'Full-day formats depend on participant availability and Culture Keeper schedule']
+      },
+      {
+        eyebrow: 'Comfort',
+        title: 'Comfortable in heat or rain',
+        copy: 'The visit does not depend on perfect weather. LAKU has covered spaces for learning, sitting, and continuing the experience when the day is hot or rainy.',
+        points: ['Fully covered indoor space with AC and fans', 'Covered terrace available for outdoor seating', 'Water, a traditional drink, and traditional snacks are provided']
+      },
+      {
+        eyebrow: 'Location',
+        title: 'Easy to combine with a South Lombok route',
+        copy: 'LAKU is in Mawun, positioned for visitors staying around Kuta Lombok, Mawun, Are Guling, Torok, and Selong Belanak. Confirm before coming so the right person and activity are ready.',
+        points: ['Share where you are staying so LAKU can suggest realistic timing', 'Send your preferred date, arrival time, group size, and activity interests', 'Message LAKU on WhatsApp: https://wa.me/6285215622162']
       }
     ],
     faqs: [
-      { question: 'Where is LAKU Culture?', answer: 'LAKU Culture is located in Mawun, Lombok, Indonesia.' },
-      { question: 'Can I visit without booking a workshop?', answer: 'Guests can ask about visiting, but booked workshops and private programs should be arranged in advance.' },
-      { question: 'What happens during a visit?', answer: 'Visitors can meet Culture Keepers, observe Indonesian cultural practices, ask questions, and inquire about workshops or longer programs.' }
+      { question: 'Where is LAKU Culture?', answer: 'LAKU Culture is located in Mawun, South Lombok, between Kuta Lombok and Selong Belanak.' },
+      { question: 'Do we need to book before visiting?', answer: 'Advance inquiry is recommended, especially for workshops, families, private groups, and visitors with limited time. This helps LAKU prepare the right Culture Keeper, materials, and schedule.' },
+      { question: 'Can I visit without booking a workshop?', answer: 'Visitors can ask about a simple visit, but hands-on workshops and private programs should be arranged in advance so the experience is ready when you arrive.' },
+      { question: 'What happens during a visit?', answer: 'Visitors can meet Culture Keepers, observe Indonesian cultural practices, ask questions, enjoy the atmosphere, and inquire about workshops, products, or longer learning programs.' },
+      { question: 'How long should we stay?', answer: 'A simple visit can be shorter, while most workshops are relaxed half-day experiences of about 3-4 hours. Full-day formats can be arranged depending on participant availability.' },
+      { question: 'What should we bring?', answer: 'Wear comfortable clothes and bring anything personal your group needs. You do not need to bring water because LAKU provides water, a traditional drink, and traditional snacks.' },
+      { question: 'What happens if it rains?', answer: 'LAKU has a fully covered indoor space with AC and fans, plus a covered terrace for outdoor seating, so visits and workshops can continue comfortably in rainy weather.' },
+      { question: 'How do we contact LAKU?', answer: 'Use the website inquiry form or message LAKU on WhatsApp at https://wa.me/6285215622162 with your date, group size, ages, where you are staying, and what you want to experience.' }
     ]
   },
   apprenticeship: {
